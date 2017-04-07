@@ -1,0 +1,76 @@
+colvarsTrajFrequency 100
+colvarsRestartFrequency 1000000
+colvarsTrajAppend    off
+smp                  on
+analysis             off
+
+#------------------
+# X-Y restraint
+#------------------
+colvar {
+    name xy
+    width 1.0
+    lowerBoundary 0.0
+    upperBoundary 10.0
+
+    distanceXY {
+        main {
+            atomsFile ../restraint/sodium1.pdb
+            atomsCol O
+            atomsColValue 1.0
+        }
+        ref {
+            dummyAtom (0, 0, 0)
+        }
+    }
+}
+
+harmonic {
+    name xy_restraint
+    colvars xy
+    forceConstant 0.025
+    centers 0.0
+    outputEnergy on
+}
+
+
+
+#---------------------------
+# main reaction coordinate
+#---------------------------
+colvar {
+    name reaction
+    width 1.0
+    upperBoundary 20.0
+    lowerBoundary 0.0
+    expandBoundaries on
+
+    upperWall 15.0
+    upperWallConstant 10.0
+
+    distanceZ {
+        main {
+            atomsFile ../restraint/sodium1.pdb
+            atomsCol O
+            atomsColValue 1.0
+        }
+        ref {
+            dummyAtom (0, 0, 10.0)
+        }
+        forceNoPBC yes
+    }
+}
+
+metadynamics {
+    name meta
+    colvars reaction
+    wellTempered on
+    biasTemperature 3000
+    outputEnergy on
+    hillWeight 0.5
+    newHillFrequency 500
+    hillWidth 4.0
+
+    writeFreeEnergyFile on
+    keepFreeEnergyFiles  on
+}

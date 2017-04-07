@@ -1,0 +1,91 @@
+source config/packages.tm
+
+######################################################
+# Author: Steven(Yuhang) Wang
+# License: CC BY 4.0 (creativecommons.org/licenses/by/4.0)
+# Date:   03/29/2017
+######################################################
+
+set stage     2
+set pre       [expr $stage - 1]
+set isRestart [expr $stage > 1 ? true : false]
+exec mkdir -p "../output/md${stage}"
+
+set temperature    310
+set save_freq      100
+set total_steps    1500
+set md_steps       [::namd::stepsToRun \
+    $total_steps \
+    "../output/md${pre}/md${pre}.restart.xsc" \
+]
+
+::namd::IO [dict create \
+    structure       "../system/system.psf" \
+    coordinates     "../system/system.pdb" \
+    output_prefix   "../output/md${stage}/md${stage}" \
+    input_prefix    "../output/md${pre}/md${pre}.restart" \
+    isRestart       $isRestart \
+]
+
+::namd::forceField [list \
+    "../forcefield/par_all36_prot.prm" \
+    "../forcefield/par_all36_lipid.prm" \
+    "../forcefield/par_all36_carb.prm" \
+    "../forcefield/par_all36_cgenff.prm" \
+    "../forcefield/toppar_all36_prot_arg0.str" \
+    "../forcefield/toppar_water_ions.str" \
+]
+
+::namd::usePBC [dict create \
+    size         {50.0 50.0 50.0} \
+    center       {0 0 0} \
+    isRestart    $isRestart \
+]
+
+::namd::interaction [dict create \
+    cutoff       12.0 \
+]
+
+::namd::outputFrequency [dict create \
+    dcd          $save_freq \
+    restart      $save_freq \
+    xst          $save_freq \
+    energy       $save_freq \
+    pressure     $save_freq \
+]
+
+::namd::integrator [dict create \
+    time_step     2.0 \
+]
+    
+::namd::usePME [dict create \
+    spacing       1.0 \
+]
+
+::namd::LangevinT [dict create \
+    T             $temperature \
+    isRestart     $isRestart \
+]
+
+::namd::LangevinP [dict create \
+    flexible_cell  yes \
+    constant_area  yes \
+    constant_ratio no \
+    T              $temperature \
+]
+
+::namd::harmonicRestraint [dict create \
+    ref "../restraint/sodium.pdb" \
+    label "../restraint/sodium.pdb" \
+    column B \
+    scaling 5.0 \
+]
+
+# gradually reduce force constant to 0
+::namd::kRun [dict create \
+    number_steps $md_steps \
+    initial 5.0 \
+    final 0 \
+    step 100 \
+]
+

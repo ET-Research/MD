@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name="mdff2"
+#SBATCH --output="../log/r1.log"
+#SBATCH --partition=development
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=16
+#SBATCH --export=ALL
+#SBATCH -t 2:00:00
+#SBATCH --mail-user=ywang148@illinois.edu
+#SBATCH --mail-type=all
+
+
+config=../namd/r2.namd.tcl
+
+#Load NAMD module
+module load namd/2.11
+
+#Run MPI job using ibrun
+ibrun namd2 $config

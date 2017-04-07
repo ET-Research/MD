@@ -1,0 +1,254 @@
+TACC: Starting up job 8304636
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+Charm++> Running on MPI version: 3.0
+Charm++> level of thread support used: MPI_THREAD_SINGLE (desired: MPI_THREAD_SINGLE)
+Charm++> Running in non-SMP mode: numPes 64
+Charm++> Using recursive bisection (scheme 3) for topology aware partitions
+Converse/Charm++ Commit ID: v6.7.0-0-g46f867c-namd-charm-6.7.0-build-2015-Dec-21-45876
+Warning> Randomization of stack pointer is turned on in kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try run with '+isomalloc_sync'.  
+CharmLB> Load balancer assumes all CPUs are same.
+Charm++> Running on 4 unique compute nodes (16-way SMP).
+Charm++> cpu topology info is gathered in 0.013 seconds.
+Info: NAMD 2.11 for Linux-x86_64-MPI
+Info: 
+Info: Please visit http://www.ks.uiuc.edu/Research/namd/
+Info: for updates, documentation, and support information.
+Info: 
+Info: Please cite Phillips et al., J. Comp. Chem. 26:1781-1802 (2005)
+Info: in all publications reporting results obtained with NAMD.
+Info: 
+Info: Based on Charm++/Converse 60700 for mpi-linux-x86_64-mpicxx
+Info: Built Mon Apr 4 11:15:52 CDT 2016 by build on c560-901.stampede.tacc.utexas.edu
+Info: 1 NAMD  2.11  Linux-x86_64-MPI  64    c558-402.stampede.tacc.utexas.edu  stevenw
+Info: Running on 64 processors, 64 nodes, 4 physical nodes.
+Info: CPU topology information available.
+Info: Charm++/Converse parallel runtime startup completed at 0.0342522 s
+Info: 266.441 MB of memory in use based on /proc/self/stat
+Info: Configuration file is ../namd/r2.namd.tcl
+Info: Changed directory to ../namd
+TCL: error parsing config file
+FATAL ERROR: error parsing config file
+    while executing
+"firsttimestep   [dict get $p "first_time_step"]"
+    (procedure "::namd::IO" line 7)
+    invoked from within
+"::namd::IO $io_params"
+    (file "r2.namd.tcl" line 62)
+------------- Processor 0 Exiting: Called CmiAbort ------------
+Reason: FATAL ERROR: error parsing config file
+    while executing
+"firsttimestep   [dict get $p "first_time_step"]"
+    (procedure "::namd::IO" line 7)
+    invoked from within
+"::namd::IO $io_params"
+    (file "r2.namd.tcl" line 62)
+
+[0] Stack Traceback:
+  [0:0] _Z8NAMD_diePKc+0x93  [0x640c53]
+  [0:1] main+0x3ca  [0x64642a]
+  [0:2] __libc_start_main+0xfd  [0x339d01ed1d]
+  [0:3]   [0x59ece9]
+[cli_0]: [cli_7]: [cli_4]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 7
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 0
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 4
+[cli_5]: [cli_11]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 5
+[cli_14]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 11
+[cli_2]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 14
+[cli_10]: [cli_8]: [cli_3]: [cli_15]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 10
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 3
+[cli_9]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 15
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 8
+[cli_13]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 9
+[cli_12]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 13
+[cli_1]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 12
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 1
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 2
+[cli_6]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 6
+[cli_57]: [cli_61]: [cli_62]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 61
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 62
+[cli_56]: [cli_60]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 56
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 60
+[cli_63]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 63
+[cli_58]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 58
+[cli_48]: [cli_59]: [cli_50]: [cli_53]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 59
+[cli_55]: [cli_51]: [cli_52]: [cli_54]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 48
+[cli_49]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 53
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 55
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 52
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 54
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 49
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 51
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 50
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 57
+[cli_39]: [cli_32]: [cli_37]: [cli_35]: [cli_34]: [cli_36]: [cli_43]: [cli_47]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 35
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 32
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 43
+[cli_42]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 36
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 47
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 39
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 42
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 37
+[cli_44]: [cli_41]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 44
+[cli_46]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 41
+[cli_38]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 46
+[cli_40]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 38
+[cli_33]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 40
+[cli_45]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 33
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 45
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 34
+[cli_31]: [cli_28]: [cli_24]: [cli_26]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 24
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 31
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 28
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 26
+[cli_27]: [cli_19]: [cli_22]: [cli_20]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 27
+[cli_30]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 22
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 20
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 19
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 30
+[cli_18]: [cli_23]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 18
+[cli_21]: [cli_16]: [cli_17]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 23
+[cli_29]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 21
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 16
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 17
+aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 29
+[cli_25]: aborting job:
+application called MPI_Abort(comm=0x84000000, 1) - process 25
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][readline] Unexpected End-Of-File on file descriptor 15. MPI process died?
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][readline] Unexpected End-Of-File on file descriptor 18. MPI process died?
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 32, pid: 33335) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][readline] Unexpected End-Of-File on file descriptor 11. MPI process died?
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][readline] Unexpected End-Of-File on file descriptor 9. MPI process died?
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][mtpmi_processops] Error while reading PMI socket. MPI process died?
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 58, pid: 10090) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 23, pid: 70221) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 0, pid: 72762) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 47, pid: 33350) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 50, pid: 10082) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 9, pid: 72771) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 34, pid: 33337) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 20, pid: 70218) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 49, pid: 10081) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 2, pid: 72764) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 33, pid: 33336) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 16, pid: 70214) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 48, pid: 10080) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 1, pid: 72763) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 35, pid: 33338) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 17, pid: 70215) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 51, pid: 10083) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 3, pid: 72765) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 36, pid: 33339) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 18, pid: 70216) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 4, pid: 72766) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 52, pid: 10084) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 37, pid: 33340) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 19, pid: 70217) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 5, pid: 72767) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 53, pid: 10085) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 38, pid: 33341) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 21, pid: 70219) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 6, pid: 72768) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 54, pid: 10086) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 39, pid: 33342) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 22, pid: 70220) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 7, pid: 72769) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 55, pid: 10087) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 40, pid: 33343) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 24, pid: 70222) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 8, pid: 72770) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 56, pid: 10088) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 41, pid: 33344) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 25, pid: 70223) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 10, pid: 72772) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 57, pid: 10089) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 42, pid: 33345) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 26, pid: 70224) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 11, pid: 72773) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 59, pid: 10091) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 43, pid: 33346) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 27, pid: 70225) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 12, pid: 72774) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 60, pid: 10092) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 44, pid: 33347) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 28, pid: 70226) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 13, pid: 72775) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 61, pid: 10093) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 45, pid: 33348) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 29, pid: 70227) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 14, pid: 72776) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 62, pid: 10094) exited with status 1
+[c558-503.stampede.tacc.utexas.edu:mpispawn_2][child_handler] MPI process (rank: 46, pid: 33349) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 30, pid: 70228) exited with status 1
+[c558-402.stampede.tacc.utexas.edu:mpispawn_0][child_handler] MPI process (rank: 15, pid: 72777) exited with status 1
+[c558-504.stampede.tacc.utexas.edu:mpispawn_3][child_handler] MPI process (rank: 63, pid: 10095) exited with status 1
+[c558-403.stampede.tacc.utexas.edu:mpispawn_1][child_handler] MPI process (rank: 31, pid: 70229) exited with status 1
+TACC: MPI job exited with code: 1
+ 
+TACC: Shutdown complete. Exiting.
