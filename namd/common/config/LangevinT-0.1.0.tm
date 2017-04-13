@@ -5,7 +5,6 @@ namespace eval ::namd {namespace export LangevinT}
 # Apply Langevin temperature control
 # input dictionary keys (default values):
 #   T (310) -- temperature
-#   isRestart (false) -- "true"/"false"
 #   couple_H (off) -- whether to include hydrogens to the bath
 #   damping (1) -- Langevin damping coefficient
 #---------------------------------------------------
@@ -13,7 +12,6 @@ proc ::namd::LangevinT {params} {
     set defaults [dict create \
         damping 1 \
         couple_H off \
-        isRestart false \
         T 310 \
     ]
     
