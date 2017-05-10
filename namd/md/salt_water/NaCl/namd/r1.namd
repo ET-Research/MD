@@ -77,4 +77,5 @@ set md_steps       1000
 
 minimize   $em_steps
 reinitvels $temperature
+firsttimestep 0
 run        $md_steps 
