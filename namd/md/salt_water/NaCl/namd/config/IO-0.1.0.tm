@@ -9,6 +9,7 @@ namespace eval ::namd {namespace export IO}
 #   output_prefix (undefined) -- output file prefix
 #   input_prefix (undefined) -- input file prefix
 #   first_time_step (0) - (optional) first time step
+#       only used when "isRestart" is "true".
 #   isRestart (false) - whether this is a restart
 #----------------------------------------------------
 proc ::namd::IO {params} {
@@ -25,9 +26,7 @@ proc ::namd::IO {params} {
     set p [dict merge $defaults $params]
     set input_prefix [dict get $p input_prefix]
     
-    if {[dict get $p isRestart] == false} {
-        firsttimestep 0
-    } else {
+    if {[string is true [dict get $p isRestart]]} {
         if {![string equal [dict get $p first_time_step] undefined]} {
             firsttimestep   [dict get $p first_time_step]
         } else {

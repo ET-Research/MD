@@ -17,7 +17,6 @@ set em_steps       100
 set md_steps       1000
 
 ::namd::IO [dict create \
-    first_time_step 0 \
     structure       "../system/system.psf" \
     coordinates     "../system/system.pdb" \
     output_prefix   "../output/md${stage}/md${stage}" \
