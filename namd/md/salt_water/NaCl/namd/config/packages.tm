@@ -24,3 +24,4 @@ source config/CV-0.1.0.tm
 source config/kRun-0.1.0.tm
 source config/stepsToRun-0.1.0.tm
 source config/aMD-0.1.0.tm
+source config/GaMD-0.1.0.tm

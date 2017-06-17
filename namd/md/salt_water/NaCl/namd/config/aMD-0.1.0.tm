@@ -2,7 +2,7 @@ namespace eval ::namd {namespace export aMD}
 
 
 #-------------------------------------------------------
-# Gaussian accelerated MD
+# Accelerated MD
 # Args:
 # alpha: boost factor. The larger, the less boost.
 # E: threshold energy
