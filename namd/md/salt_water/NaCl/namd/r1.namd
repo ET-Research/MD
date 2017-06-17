@@ -26,11 +26,11 @@ set md_steps       1000
 ]
 
 ::namd::forceField [list \
-    "../forcefield/par_all36_prot.prm" \
+    "../forcefield/par_all36m_prot.prm" \
+    "../forcefield/par_all36_na.prm" \
     "../forcefield/par_all36_lipid.prm" \
     "../forcefield/par_all36_carb.prm" \
     "../forcefield/par_all36_cgenff.prm" \
-    "../forcefield/toppar_all36_prot_arg0.str" \
     "../forcefield/toppar_water_ions.str" \
 ]
 
@@ -73,6 +73,16 @@ set md_steps       1000
     constant_area  yes \
     constant_ratio no \
     T              $temperature \
+]
+
+::namd::aMD [dict create \
+    alpha    10000 \
+    E        -33966 \
+    start    100 \
+    stop     0   \
+    freq     100 \
+    dihedral off \
+    dual     off \
 ]
 
 minimize   $em_steps
