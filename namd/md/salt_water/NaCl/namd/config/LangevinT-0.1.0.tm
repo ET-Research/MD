@@ -14,7 +14,7 @@ proc ::namd::LangevinT {params} {
         damping 1 \
         couple_H off \
         isRestart false \
-        T 310 \
+        T undefined \
     ]
     
     assertDictKeyLegal $defaults $params "::namd::LangevinT"
