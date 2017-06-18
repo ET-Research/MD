@@ -1,0 +1,56 @@
+Gaussian Accelerated Molecular Dynamics (GaMD)
+
+GaMD in NAMD
+
+Simulation Parameter Settings
+
+- accelMDG < Is Gaussian accelerated MD on? >
+Acceptable Values: on or off
+Default Value: off
+Description: Specifies whether Gaussian accelerated MD (GaMD) is on.
+
+- accelMDGiE < Flag to set the threshold energy for adding boost potential >
+Acceptable Values: 1, 2
+Default Value: 1
+Description: Specifies how the threshold energy is set in GaMD. A value of 1 indicates that the threshold energy is set to its lower bound E = Vmax. A value of 2 indicates that the threshold energy is set to its upper bound E = Vmin + (Vmax - Vmin) / k0.
+
+- accelMDGcMDPrepSteps < no. of preparatory cMD steps >
+Acceptable Values: Zero or Positive integer
+Default Values: 200,000
+Description: The number of preparatory conventional MD (cMD) steps in GaMD. This value should be smaller than accelMDGcMDSteps (see below). Potential energies are not collected for calculating the values of Vmax, Vmin, Vavg, σV during the first accelMDGcMDPrepSteps.
+
+- accelMDGcMDSteps < no. of total cMD steps in GaMD >
+Acceptable Values: Positive integer
+Default Value: 1,000,000
+Description: The number of total cMD steps in GaMD. With accelMDGcMDPrepSteps < t < accelMDGcMDSteps, Vmax, Vmin, Vavg, σV are collected and at t = accelMDGcMDSteps, E and k0 are computed.
+
+- accelMDGEquiPrepSteps < no. of preparatory equilibration steps in GaMD >
+Acceptable Values: Zero or Positive integer
+Default Value: 200,000
+Description: The number of preparatory equilibration steps in GaMD. This value should be smaller than accelMDGEquiSteps (see below). With accelMDGcMDSteps < t < accelMDGEquiPrepSteps+accelMDGcMDSteps, GaMD boost potential is applied according to E and k0 obtained at t=accelMDGcMDSteps.
+
+- accelMDGEquiSteps < no. of total equilibration steps in GaMD >
+Acceptable Values: Zero or Positive integer
+Default Value: 1,000,000
+Description: The number of total equilibration steps in GaMD. With accelMDGEquiPrepSteps+accelMDGcMDSteps < t < accelMDGEquiSteps +accelMDGcMDSteps, GaMD boost potential is applied, and E and k0 are updated every step.
+
+- accelMDGSigma0P < upper limit of the standard deviation of the total boost potential in GaMD >
+Acceptable Values: Positive real number
+Default Value: 6.0 (kcal/mol)
+Description: Specifies the upper limit of the standard deviation of the total boost potential. This option is only available when accelMDdihe is off or when accelMDdual is on.
+
+- accelMDGSigma0D < upper limit of S.D. of the dihedral potential boost in GaMD >
+Acceptable Values: Positive real number
+Default Value: 6.0 (kcal/mol)
+Description: Specifies the upper limit of the standard deviation of the dihedral boost potential. This option is only available when accelMDdihe or accelMDdual is on.
+
+- accelMDGRestart < Flag to restart GaMD simulation >
+Acceptable Values: on or off
+Default Value: off
+Description: Specifies whether the current GaMD simulation is the continuation of a previous run. If this option is turned on, the GaMD restart file specified by accelMDGRestartFile (see below) will be read.
+
+- accelMDGRestartFile < Name of GaMD restart file >
+Acceptable Values: UNIX filename
+Description: A GaMD restart file that stores the current number of steps, maximum, minimum, average, standard deviation of the dihedral and/or total potential energies (depending on the accelMDdihe and accelMDdual parameters) and the current timestep settings. This file is saved automatically every restartfreq steps. If accelMDGRestart is turned on, this file will be read and the simulation will restart from the point where the file was written.
+
+NOTE: Suitable parameters from aMD, including "accelMD", "accelMDdihe", "accelMDdual", "accelMDFirstStep", "accelMDLastStep" and "accelMDOutFreq", are shared by GaMD. Please refer to the NAMD user manual for their detailed description.
