@@ -10,11 +10,18 @@ import numpy
 import os
 
 
-def raw(n, start=-1, stop=1):
+def LJ(x, eps=4, sigma=1):
+    """Return Lennard-Jones potential"""
+    r = sigma/x
+    return 4*eps*(numpy.power(r, 12) - numpy.power(r, 6))
+
+
+def raw(n, start=0.99, stop=3):
     """Return (x, y)"""
     x = numpy.linspace(start, stop, num=n)
-    y = numpy.square(x)
+    y = LJ(x)
     return (x, y)
+
 
 def flatten(const_y, E):
     """
@@ -25,11 +32,13 @@ def flatten(const_y, E):
     y[ids] += (E - y[ids])
     return y
 
+
 def squared(const_y, E):
     y = numpy.copy(const_y)
     ids = numpy.argwhere(y <= E)
     y[ids] += (E - y[ids])**2
     return y
+
 
 def dampened(const_y, E, k):
     y = numpy.copy(const_y)
@@ -37,13 +46,14 @@ def dampened(const_y, E, k):
     y[ids] += k * (E - y[ids])**2
     return y
 
+
 def combine(xs):
     return numpy.vstack(xs).T
 
 def main():
-    n = 100
-    E = 2
-    x, y = raw(n, start=-2, stop=2)
+    n = 200
+    E = -2
+    x, y = raw(n)
     f_out1 = os.path.join("data", "raw.data")
     numpy.savetxt(f_out1, combine((x, y)))
 

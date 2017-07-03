@@ -11,7 +11,7 @@ namespace eval ::namd {namespace export aMD}
 # start: first time step where aMD starts
 # stop (0): last time step where aMD should stop
 #       The default is "0", meaning aMD will be applied forever.
-# freq: the output frequency of aMD boost potentials
+# log: the output frequency of aMD boost potentials
 # dihedral (off): if "on", turn on dihedral boost and turn off total boost
 #       if "off", turn on total boost and turn off dihedral boost
 # dual (off): if "on", then both dihedral and total boost are applied.
@@ -22,7 +22,7 @@ proc ::namd::aMD {params} {
         E        undefined \
         start    undefined \
         stop     0 \
-        freq     undefined \
+        log      undefined \
         dihedral off \
         dual     off \
         alpha_t  undefined \
@@ -39,7 +39,7 @@ proc ::namd::aMD {params} {
     accelMDdual      [dict get $p dual]
     accelMDFirstStep [dict get $p start]
     accelMDLastStep  [dict get $p stop]
-    accelMDOutFreq   [dict get $p freq]
+    accelMDOutFreq   [dict get $p log]
     if {[string is true [dict get $p dual]]} {
         # only available when accelMDdual is "on"
         accelMDTalpha   [dict get $p alpha_t]
