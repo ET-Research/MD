@@ -14,7 +14,8 @@ set replicaId      [myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
-set md_steps       200
+set total_steps    0
+set block_steps     40
 
 exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
@@ -58,9 +59,9 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     time_step     2.0 \
 ]
     
-::namd::usePME [dict create \
-    spacing       1.0 \
-]
+# ::namd::usePME [dict create \
+#     spacing       1.0 \
+# ]
 
 ::namd::T [dict create \
     T $temperature \
@@ -79,12 +80,15 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     T              $temperature \
 ]
 
-
-puts "==================="
-puts "numPes = [catch numPes]"
-puts "==================="
 if { ! [catch numPes] } {
     ::namd::rx::run [dict create \
-        total 3 \
-    ] 
+        restart undefined \
+        steps [dict create \
+            total $total_steps \
+            block $block_steps \
+        ] \
+    ]
 }
+
+startup
+exit

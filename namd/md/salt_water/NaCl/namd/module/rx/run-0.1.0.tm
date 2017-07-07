@@ -7,20 +7,32 @@ namespace eval ::namd::rx {namespace export run}
 #----------------------------------------------------
 proc ::namd::rx::run {params} {
     set defaults [dict create \
-        total undefined \
-        output undefined \
-        restart_file undefined \
+        restart undefined \
+        steps [dict create \
+            total undefined \
+            block undefined \
+        ] \
+        gsmd {} \
     ]
+
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
     set p [dict merge $defaults $params]
     
-    replicaBarrier
-    ::namd::rx::checkReplicaCount [dict get $p total]
+    # total number of MD steps
+    set total_steps [dict get $p steps total]
 
-    set rInfo [::namd::rx::replicaInfo [dict get $p restart_file]]
-    puts "==========================="
-    puts "replica [myReplica]"
-    puts $rInfo
-    puts "==========================="
-    replicaBarrier
+    # number of steps between replica exchanges
+    set block_steps [dict get $p steps block]
+
+
+    ::replicaBarrier
+    set rInfo [::namd::rx::replicaNeighbor]
+    set ccc 0
+    while {$ccc < $total_steps} {
+        ::run $block_steps
+
+        incr ccc $block_steps
+    }
+
+    ::replicaBarrier
 }
