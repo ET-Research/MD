@@ -6,7 +6,7 @@ namespace eval ::namd::rx {namespace export replicaInfo}
 # Get information of the current replica
 # and return a dictionary.
 #--------------------------------------------------------
-proc ::namd::rx::relicaInfo {{restart_file undefined}} {
+proc ::namd::rx::replicaInfo {{restart_file undefined}} {
     set here  [myReplica]
     set left  [expr $here - 1]
     set right [expr $here + 1]
@@ -25,7 +25,7 @@ proc ::namd::rx::relicaInfo {{restart_file undefined}} {
             set index_b $left
         } else {
             set local_b $here
-            set local_b $here
+            set index_b $here
         }
     } else {
         if {[myReplica] > 0} {

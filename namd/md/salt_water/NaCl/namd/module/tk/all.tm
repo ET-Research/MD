@@ -1,3 +1,3 @@
-source module/list/all.tm
-source module/dict/all.tm
-source module/math/all.tm
+source module/tk/list/all.tm
+source module/tk/dict/all.tm
+source module/tk/math/all.tm

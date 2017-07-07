@@ -3,25 +3,28 @@ source module/Apps.tm
 ######################################################
 # Author: Steven(Yuhang) Wang
 # License: CC BY 4.0 (creativecommons.org/licenses/by/4.0)
-# Date:   03/23/2017
+# Date:   07/07/2017
 ######################################################
 
 set stage     1
 set pre       [expr $stage - 1]
 set isRestart [expr $stage > 1 ? true : false]
-exec mkdir -p "../output/md${stage}"
 
+set replicaId      [myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
-set md_steps       1000
+set md_steps       200
+
+exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
 ::namd::IO [dict create \
     structure       "../system/system.psf" \
     coordinates     "../system/system.pdb" \
-    output_prefix   "../output/md${stage}/md${stage}" \
-    input_prefix    "../output/md${pre}/md${pre}.restart" \
+    output_prefix   "../output/replica/${replicaId}/md${stage}/md${stage}" \
+    input_prefix    "../output/replica/${replicaId}/md${pre}/md${pre}.restart" \
     isRestart       $isRestart \
+    isReplica       true \
 ]
 
 ::namd::forceField [list \
@@ -68,3 +71,20 @@ set md_steps       1000
     T $temperature \
     isRestart $isRestart \
 ]
+
+::namd::LangevinP [dict create \
+    flexible_cell  yes \
+    constant_area  yes \
+    constant_ratio no \
+    T              $temperature \
+]
+
+
+puts "==================="
+puts "numPes = [catch numPes]"
+puts "==================="
+if { ! [catch numPes] } {
+    ::namd::rx::run [dict create \
+        total 3 \
+    ] 
+}
