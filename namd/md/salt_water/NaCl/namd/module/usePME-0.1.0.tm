@@ -10,7 +10,7 @@ proc ::namd::usePME {params} {
     set defaults [dict create \
         spacing 1.0 \
     ]
-    assertDictKeyLegal $defaults $params "::namd::usePME"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::usePME"
     set p [dict merge $defaults $params]
     PME yes
     PMEGridSpacing [dict get $p spacing]

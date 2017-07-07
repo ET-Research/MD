@@ -1,4 +1,4 @@
-source config/packages.tm
+source module/Apps.tm
 
 ######################################################
 # Author: Steven(Yuhang) Wang

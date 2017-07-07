@@ -17,7 +17,7 @@ proc ::namd::symmetryRestraint {params} {
         k         undefined \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::symmetryRestraint"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::symmetryRestraint"
     set p [dict merge $defaults $params]
 
     symmetryRestraints on

@@ -25,7 +25,7 @@ proc ::namd::harmonicRestraint {params} {
         z on \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::harmonicRestraint"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::harmonicRestraint"
     set p [dict merge $defaults $params]
 
     constraints       on

@@ -58,7 +58,7 @@ proc ::namd::GaMD {params} {
         restart_file undefined \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::GaMD"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::GaMD"
     set p [dict merge $defaults $params]
     
     accelMDG on

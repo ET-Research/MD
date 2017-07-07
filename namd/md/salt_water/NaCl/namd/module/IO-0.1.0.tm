@@ -22,7 +22,7 @@ proc ::namd::IO {params} {
         input_prefix    undefined \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::IO"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::IO"
     set p [dict merge $defaults $params]
     set input_prefix [dict get $p input_prefix]
     

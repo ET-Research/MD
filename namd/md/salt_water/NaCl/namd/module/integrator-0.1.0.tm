@@ -19,7 +19,7 @@ proc ::namd::integrator {params} {
         rigid_bonds      all \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::integrator"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::integrator"
     set p [dict merge $defaults $params]
 
     rigidBonds          [dict get $p rigid_bonds]

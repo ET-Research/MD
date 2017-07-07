@@ -31,7 +31,7 @@ proc ::namd::LangevinP {params} {
         T         undefined \
     ]
     
-    assertDictKeyLegal $defaults $params "::namd::LangevinP"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::LangevinP"
     set p [dict merge $defaults $params]
 
     useGroupPressure      [dict get $p "group"] ;# needed for 2fs steps

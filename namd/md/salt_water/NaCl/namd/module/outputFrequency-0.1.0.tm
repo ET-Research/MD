@@ -19,7 +19,7 @@ proc ::namd::outputFrequency {params} {
         pressure 5000 \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::outputFrequency"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::outputFrequency"
     set p [dict merge $defaults $params]
 
     dcdfreq             [dict get $p "dcd"]

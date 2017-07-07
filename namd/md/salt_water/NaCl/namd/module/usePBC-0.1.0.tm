@@ -19,7 +19,7 @@ proc ::namd::usePBC {params} {
         center     undefined \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::usePBC"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::usePBC"
     set p [dict merge $defaults $params]
 
     if {[dict get $p "isRestart"] == false} {

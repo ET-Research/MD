@@ -17,7 +17,7 @@ proc ::namd::LangevinT {params} {
         T undefined \
     ]
     
-    assertDictKeyLegal $defaults $params "::namd::LangevinT"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::LangevinT"
     set p [dict merge $defaults $params]
 
     

@@ -1,4 +1,4 @@
-source config/packages.tm
+source module/Apps.tm
 
 if { ! [catch numPes] } {
     ::namd::rx::run [dict create \

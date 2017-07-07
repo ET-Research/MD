@@ -16,7 +16,7 @@ proc ::namd::kRun {params} {
         initial undefined \
         final undefined \
     ]
-    assertDictKeyLegal $defaults $params "::namd::kRun"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::kRun"
     set p [dict merge $defaults $params]
 
     set step [dict get $p step]

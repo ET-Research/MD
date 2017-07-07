@@ -20,7 +20,7 @@ proc ::namd::GB {params} {
         born_cutoff           14.0 \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::GB"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::GB"
     set p [dict merge $defaults $params]
     
     gbis on

@@ -30,7 +30,7 @@ proc ::namd::gridForce {param_list} {
         mgridForce on
         set ccc 0
         foreach params $param_list {
-            assertDictKeyLegal $defaults $params "::namd::gridForce"
+            ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::gridForce"
             set p [dict merge $defaults $params]
             incr ccc
             set tag "G${ccc}"

@@ -29,7 +29,7 @@ proc ::namd::aMD {params} {
         E_t      undefined \
     ]
 
-    assertDictKeyLegal $defaults $params "::namd::GMD"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::GMD"
     set p [dict merge $defaults $params]
     
     accelMD on

@@ -39,7 +39,7 @@ proc ::namd::interaction {params} {
         pair_list_dist 13.5 \
     ]
     
-    assertDictKeyLegal $defaults $params "::namd::interaction"
+    ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::interaction"
     set p [dict merge $defaults $params]
 
     exclude             [dict get $p exclude]

@@ -1,4 +1,4 @@
-namespace eval ::namd::rx {namespace export rx_checkReplicaCount}
+namespace eval ::namd::rx {namespace export checkReplicaCount}
 
 proc ::namd::rx::checkReplicaCount {n} {
     if { $n != [numReplicas] } {
