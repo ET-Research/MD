@@ -1,0 +1,7 @@
+source config/packages.tm
+
+if { ! [catch numPes] } {
+    ::namd::rx::run [dict create \
+        total 2 \
+    ] 
+}
