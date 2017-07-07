@@ -14,7 +14,7 @@ set replicaId      [myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
-set total_steps    0
+set total_steps    200
 set block_steps     40
 
 exec mkdir -p "../output/replica/${replicaId}/md${stage}"
@@ -37,11 +37,6 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     "../forcefield/toppar_water_ions.str" \
 ]
 
-::namd::usePBC [dict create \
-    size         {50.0 50.0 50.0} \
-    center       {0 0 0} \
-    isRestart    $isRestart \
-]
 
 ::namd::interaction [dict create \
     cutoff       12.0 \
@@ -63,6 +58,8 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 #     spacing       1.0 \
 # ]
 
+::namd::GB {}
+
 ::namd::T [dict create \
     T $temperature \
     isRestart $isRestart \
@@ -71,13 +68,6 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 ::namd::LangevinT [dict create \
     T $temperature \
     isRestart $isRestart \
-]
-
-::namd::LangevinP [dict create \
-    flexible_cell  yes \
-    constant_area  yes \
-    constant_ratio no \
-    T              $temperature \
 ]
 
 if { ! [catch numPes] } {

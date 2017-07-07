@@ -1,0 +1,8 @@
+- outputs:
+  - - ion.psf
+    - ion.pdb
+  inputs:
+  - system.psf
+  - system.pdb
+  selections:
+  - ion
