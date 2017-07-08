@@ -14,8 +14,8 @@ set replicaId      [myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
-set total_steps     80
-set block_steps     40
+set total_steps    100
+set block_steps     20
 
 exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
@@ -73,11 +73,9 @@ if { ! [catch numPes] } {
             total $total_steps \
             block $block_steps \
         ] \
+        output "../output/replica/$replicaId/md${stage}/md${stage}.xlog" \
     ]
 }
 
-::namd::resetVel $temperature
-::namd::resetTime
-::namd::run 20
 startup
 exit
