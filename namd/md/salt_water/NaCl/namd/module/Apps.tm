@@ -26,4 +26,5 @@ source module/run-0.1.0.tm
 source module/minimize-0.1.0.tm
 source module/resetVel-0.1.0.tm
 source module/resetTime-0.1.0.tm
+source module/dielectric-0.1.0.tm
 source module/rx/all.tm
