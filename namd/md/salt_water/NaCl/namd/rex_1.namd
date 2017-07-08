@@ -66,6 +66,8 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     isRestart $isRestart \
 ]
 
+::namd::margin 5
+
 if { ! [catch numPes] } {
     ::namd::rx::run [dict create \
         restart undefined \
@@ -77,9 +79,10 @@ if { ! [catch numPes] } {
     ]
 }
 
+
 puts "======================================="
 puts "namespace of "
-puts [namespace which -command run]
+puts [namespace which -command margin]
 puts "======================================="
 startup
 exit
