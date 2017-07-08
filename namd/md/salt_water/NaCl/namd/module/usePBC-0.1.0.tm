@@ -24,14 +24,14 @@ proc ::namd::usePBC {params} {
 
     if {[dict get $p "isRestart"] == false} {
         lassign [dict get $p "size"] Lx Ly Lz
-        cellBasisVector1 $Lx 0. 0.
-        cellBasisVector2 0. $Ly 0.
-        cellBasisVector3 0. 0. $Lz
+        ::cellBasisVector1 $Lx 0. 0.
+        ::cellBasisVector2 0. $Ly 0.
+        ::cellBasisVector3 0. 0. $Lz
 
         lassign [dict get $p "center"] x0 y0 z0
-        cellOrigin $x0 $y0 $z0
+        ::cellOrigin $x0 $y0 $z0
     } else {}
 
-    wrapWater [dict get $p "wrap_water"]
-    wrapAll   [dict get $p "wrap_all"]
+    ::wrapWater [dict get $p "wrap_water"]
+    ::wrapAll   [dict get $p "wrap_all"]
 }

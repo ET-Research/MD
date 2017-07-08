@@ -14,21 +14,21 @@ set replicaId      [myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
-set total_steps    200
+set total_steps     80
 set block_steps     40
 
 exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
 ::namd::IO [dict create \
-    structure       "../system/system.psf" \
-    coordinates     "../system/system.pdb" \
+    structure       "../system/ion.psf" \
+    coordinates     "../system/ion.pdb" \
     output_prefix   "../output/replica/${replicaId}/md${stage}/md${stage}" \
     input_prefix    "../output/replica/${replicaId}/md${pre}/md${pre}.restart" \
     isRestart       $isRestart \
     isReplica       true \
 ]
 
-::namd::forceField [list \
+::namd::forceField "charmm" [list \
     "../forcefield/par_all36m_prot.prm" \
     "../forcefield/par_all36_na.prm" \
     "../forcefield/par_all36_lipid.prm" \
@@ -54,10 +54,6 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     time_step     2.0 \
 ]
     
-# ::namd::usePME [dict create \
-#     spacing       1.0 \
-# ]
-
 ::namd::GB {}
 
 ::namd::T [dict create \
@@ -80,5 +76,8 @@ if { ! [catch numPes] } {
     ]
 }
 
+::namd::resetVel $temperature
+::namd::resetTime
+::namd::run 20
 startup
 exit

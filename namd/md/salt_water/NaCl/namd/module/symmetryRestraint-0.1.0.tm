@@ -20,14 +20,14 @@ proc ::namd::symmetryRestraint {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::symmetryRestraint"
     set p [dict merge $defaults $params]
 
-    symmetryRestraints on
-    symmetryMatrixFile [dict get $p matrix]
-    symmetryFile       [dict get $p label]
+    ::symmetryRestraints on
+    ::symmetryMatrixFile [dict get $p matrix]
+    ::symmetryFile       [dict get $p label]
 
     set k [dict get $p k]
     if {[string is double $k] || [string is integer $k]} {
-        symmetryk     $k
+        ::symmetryk     $k
     } else {
-        symmetrykFile $k
+        ::symmetrykFile $k
     }
 }

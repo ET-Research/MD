@@ -61,38 +61,38 @@ proc ::namd::GaMD {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::GaMD"
     set p [dict merge $defaults $params]
     
-    accelMDG on
+    ::accelMDG on
     if {[dict get $p type] eq "lower"} {
-        accelMDGiE 1
+        ::accelMDGiE 1
     } else {
-        accelMDGiE 2
+        ::accelMDGiE 2
     }
-    accelMDGcMDPrepSteps  [dict get $p sample ignore]
-    accelMDGcMDSteps      [dict get $p sample total]
-    accelMDGEquiPrepSteps [dict get $p boost static]
-    accelMDGEquiSteps     [dict get $p boost total]
+    ::accelMDGcMDPrepSteps  [dict get $p sample ignore]
+    ::accelMDGcMDSteps      [dict get $p sample total]
+    ::accelMDGEquiPrepSteps [dict get $p boost static]
+    ::accelMDGEquiSteps     [dict get $p boost total]
 
     if {[string is false [dict get $p dihedral]] || \
         [string is true [dict get $p dual]] } {
-        accelMDGSigma0P   [dict get $p std total]
+        ::accelMDGSigma0P   [dict get $p std total]
     }
 
     if {[string is true [dict get $p dihedral]] || \
         [string is true [dict get $p dual]] } {
-        accelMDGSigma0D   [dict get $p std dihedral]
+        ::accelMDGSigma0D   [dict get $p std dihedral]
     }
 
     if {[dict get $p restart_file] ne "undefined"} {
-        accelMDGRestart on
-        accelMDGRestartFile [dict get $p restart_file]
+        ::accelMDGRestart on
+        ::accelMDGRestartFile [dict get $p restart_file]
     } else {
-        accelMDGRestart off
+        ::accelMDGRestart off
     }
 
-    accelMD          on
-    accelMDdihe      [dict get $p dihedral]
-    accelMDdual      [dict get $p dual]
-    accelMDFirstStep [dict get $p start]
-    accelMDLastStep  [dict get $p stop]
-    accelMDOutFreq   [dict get $p log]
+    ::accelMD          on
+    ::accelMDdihe      [dict get $p dihedral]
+    ::accelMDdual      [dict get $p dual]
+    ::accelMDFirstStep [dict get $p start]
+    ::accelMDLastStep  [dict get $p stop]
+    ::accelMDOutFreq   [dict get $p log]
 }

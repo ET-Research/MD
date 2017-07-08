@@ -34,7 +34,7 @@ proc ::namd::rx::run {params} {
     while {$ccc < $total_steps} {
         ::run $block_steps
 
-        callback ::namd::rx::exchange
+        ::callback ::namd::rx::exchange
         incr ccc $block_steps
     }
 

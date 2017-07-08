@@ -12,6 +12,6 @@ proc ::namd::CV {params} {
     colvarsConfig [dict get $params config]
 
     if {[dict exists $params input]} {
-        colvarsInput [dict get $params input]
+        ::colvarsInput [dict get $params input]
     } else {}
 }

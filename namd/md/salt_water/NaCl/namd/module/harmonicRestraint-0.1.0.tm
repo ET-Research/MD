@@ -28,14 +28,14 @@ proc ::namd::harmonicRestraint {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::harmonicRestraint"
     set p [dict merge $defaults $params]
 
-    constraints       on
-    consexp           [dict get $p exponent]
-    consref           [dict get $p ref]
-    conskfile         [dict get $p label]
-    conskcol          [dict get $p column]
-    constraintScaling [dict get $p scaling]
-    selectConstraints on
-    selectConstrX     [dict get $p x]
-    selectConstrY     [dict get $p y]
-    selectConstrZ     [dict get $p z]
+    ::constraints       on
+    ::consexp           [dict get $p exponent]
+    ::consref           [dict get $p ref]
+    ::conskfile         [dict get $p label]
+    ::conskcol          [dict get $p column]
+    ::constraintScaling [dict get $p scaling]
+    ::selectConstraints on
+    ::selectConstrX     [dict get $p x]
+    ::selectConstrY     [dict get $p y]
+    ::selectConstrZ     [dict get $p z]
 }

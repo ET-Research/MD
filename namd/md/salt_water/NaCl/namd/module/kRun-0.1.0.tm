@@ -40,13 +40,13 @@ proc ::namd::kRun {params} {
         exit
     }
 
-    run $step
+    ::run $step
     for {set i 1} {$i <= $N} {incr i} {
         set gamma [expr $initial * (1.0 - $i/double($N))]
         puts "==================================================="
         puts ">>> Change force constant scaling factor to: $gamma"
         puts "==================================================="
-        constraintScaling $gamma
-        run $step
+        ::constraintScaling $gamma
+        ::run $step
     }
 }

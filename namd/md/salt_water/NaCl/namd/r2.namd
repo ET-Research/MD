@@ -28,7 +28,7 @@ set md_steps       [::namd::stepsToRun \
     isRestart       $isRestart \
 ]
 
-::namd::forceField [list \
+::namd::forceField charmm [list \
     "../forcefield/par_all36_prot.prm" \
     "../forcefield/par_all36_lipid.prm" \
     "../forcefield/par_all36_carb.prm" \

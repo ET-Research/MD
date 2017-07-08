@@ -15,9 +15,9 @@ proc ::namd::T {p} {
     } else {}
 
     if {[dict exists $p T_final]} {
-        reassignFreq [dict get $p freq]
-        reassignIncr [dict get $p step]
-        reassignTemp [dict get $p T]
-        reassignHold [dict get $p T_final]
+        ::reassignFreq [dict get $p freq]
+        ::reassignIncr [dict get $p step]
+        ::reassignTemp [dict get $p T]
+        ::reassignHold [dict get $p T_final]
     }
 }

@@ -8,7 +8,7 @@ namespace eval ::namd {namespace export elecField}
 # normalized - "yes" | "no"
 #------------------------------------------------------------
 proc ::namd::elecField {d} {
-    eFieldOn              yes
-    eField                [dict get $d vector]
-    eFieldNormalized      [dict get $d normalized]
+    ::eFieldOn              yes
+    ::eField                [dict get $d vector]
+    ::eFieldNormalized      [dict get $d normalized]
 }

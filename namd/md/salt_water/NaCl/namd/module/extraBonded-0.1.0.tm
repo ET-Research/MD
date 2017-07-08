@@ -5,8 +5,8 @@ namespace eval ::namd { namespace export extraBonded }
 # files: a list of files with extra bonded interaction definitions
 # ------------------------------------------------------
 proc ::namd::extraBonded {files} {
-    extraBonds on
+    ::extraBonds on
     foreach f $files {
-        extraBondsFile $f
+        ::extraBondsFile $f
     }
 }
