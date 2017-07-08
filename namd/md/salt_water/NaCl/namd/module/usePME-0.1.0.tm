@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export usePME}
+namespace eval ::namd {}
 
 
 #---------------------------------------------------

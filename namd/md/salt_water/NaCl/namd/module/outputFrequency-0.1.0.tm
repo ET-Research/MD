@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export outputFrequency}
+namespace eval ::namd {}
 
 
 #----------------------------------------------------------------------

@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export IO}
+namespace eval ::namd {}
 
 
 #----------------------------------------------------

@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export lastTimeStep}
+namespace eval ::namd {}
 
 
 #---------------------------------------------------

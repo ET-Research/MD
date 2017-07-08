@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export gridForce}
+namespace eval ::namd {}
 
 
 #-------------------------------------------------------
@@ -27,7 +27,7 @@ proc ::namd::gridForce {param_list} {
     ]
     
     if {[llength $param_list] > 0} {
-        ::mgridForce on
+        mgridForce on
         set ccc 0
         foreach params $param_list {
             ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::gridForce"
@@ -37,15 +37,15 @@ proc ::namd::gridForce {param_list} {
             lassign [dict get $p scaling] sx sy sz
             lassign [dict get $p pbc] pbc_x pbc_y pbc_z
 
-            ::mgridForceFile      $tag     [dict get $p label]
-            ::mgridForceCol       $tag     O
-            ::mgridForceChargeCol $tag     B
-            ::mgridForceVolts     $tag     [dict get $p volt]
-            ::mgridForcePotFile   $tag     [dict get $p dx]
-            ::mgridForceScale     $tag     $sx $sy $sz
-            ::mgridForceCont1     $tag     $pbc_x
-            ::mgridForceCont2     $tag     $pbc_y
-            ::mgridForceCont3     $tag     $pbc_z
+            mgridForceFile      $tag     [dict get $p label]
+            mgridForceCol       $tag     O
+            mgridForceChargeCol $tag     B
+            mgridForceVolts     $tag     [dict get $p volt]
+            mgridForcePotFile   $tag     [dict get $p dx]
+            mgridForceScale     $tag     $sx $sy $sz
+            mgridForceCont1     $tag     $pbc_x
+            mgridForceCont2     $tag     $pbc_y
+            mgridForceCont3     $tag     $pbc_z
         }
     }
 }

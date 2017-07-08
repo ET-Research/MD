@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export LangevinP}
+namespace eval ::namd {}
 
 
 #-------------------------------------------------------

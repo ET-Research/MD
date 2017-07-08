@@ -77,5 +77,9 @@ if { ! [catch numPes] } {
     ]
 }
 
+puts "======================================="
+puts "namespace of "
+puts [namespace which -command run]
+puts "======================================="
 startup
 exit

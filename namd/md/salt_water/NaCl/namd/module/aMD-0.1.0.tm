@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export aMD}
+namespace eval ::namd {}
 
 
 #-------------------------------------------------------
@@ -32,17 +32,17 @@ proc ::namd::aMD {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::GMD"
     set p [dict merge $defaults $params]
     
-    ::accelMD on
-    ::accelMDalpha     [dict get $p alpha]
-    ::accelMDE         [dict get $p E]
-    ::accelMDdihe      [dict get $p dihedral]
-    ::accelMDdual      [dict get $p dual]
-    ::accelMDFirstStep [dict get $p start]
-    ::accelMDLastStep  [dict get $p stop]
-    ::accelMDOutFreq   [dict get $p log]
+    accelMD on
+    accelMDalpha     [dict get $p alpha]
+    accelMDE         [dict get $p E]
+    accelMDdihe      [dict get $p dihedral]
+    accelMDdual      [dict get $p dual]
+    accelMDFirstStep [dict get $p start]
+    accelMDLastStep  [dict get $p stop]
+    accelMDOutFreq   [dict get $p log]
     if {[string is true [dict get $p dual]]} {
         # only available when ::accelMDdual is "on"
-        ::accelMDTalpha   [dict get $p alpha_t]
-        ::accelMDTE       [dict get $p E_t]
+        accelMDTalpha   [dict get $p alpha_t]
+        accelMDTE       [dict get $p E_t]
     }
 }

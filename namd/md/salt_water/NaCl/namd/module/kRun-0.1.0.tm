@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export kRun}
+namespace eval ::namd {}
 
 #-----------------------------------------------------------------
 # Run MD steps with gradually decreasing force constant
@@ -46,7 +46,7 @@ proc ::namd::kRun {params} {
         puts "==================================================="
         puts ">>> Change force constant scaling factor to: $gamma"
         puts "==================================================="
-        ::constraintScaling $gamma
+        constraintScaling $gamma
         ::run $step
     }
 }

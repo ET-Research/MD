@@ -1,4 +1,4 @@
-namespace eval ::namd {namespace export runSMD}
+namespace eval ::namd {}
 
 #----------------------------------------------------
 # NAMD input output parameters
