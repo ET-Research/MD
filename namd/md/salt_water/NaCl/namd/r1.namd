@@ -79,12 +79,12 @@ set md_steps       1000
     E        -33966 \
     start    100 \
     stop     0   \
-    freq     100 \
+    log      100 \
     dihedral off \
     dual     off \
-]
+] 
 
-minimize   $em_steps
-reinitvels $temperature
-firsttimestep 0
-run        $md_steps 
+::namd::minimize  $em_steps
+::namd::resetVel  $temperature
+::namd::resetTime 0
+::namd::run       $md_steps 

@@ -40,9 +40,9 @@ proc ::namd::IO {params} {
     
     if {[string is true [dict get $p isRestart]]} {
         if {![string equal [dict get $p first_time_step] undefined]} {
-            ::firsttimestep   [dict get $p first_time_step]
+            firsttimestep   [dict get $p first_time_step]
         } else {
-            ::firsttimestep   [::namd::lastTimeStep "${input_prefix}.xsc"]
+            firsttimestep   [::namd::lastTimeStep "${input_prefix}.xsc"]
         }
     }
     
