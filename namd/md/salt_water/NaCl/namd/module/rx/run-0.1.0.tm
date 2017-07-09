@@ -36,3 +36,4 @@ proc ::namd::rx::run {params} {
         [dict get $p output]
     ::replicaBarrier
 }
+
