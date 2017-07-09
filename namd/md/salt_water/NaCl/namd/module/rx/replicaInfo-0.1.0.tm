@@ -1,12 +1,12 @@
 source module/tk/math/isEven-0.1.0.tm
 
-namespace eval ::namd::rx {namespace export replicaNeighbor}
+namespace eval ::namd::rx {}
 
 #--------------------------------------------------------
 # Get information of the current replica
 # and return a dictionary.
 #--------------------------------------------------------
-proc ::namd::rx::replicaNeighbor {} {
+proc ::namd::rx::replicaInfo {} {
     set here  [::myReplica]
     set left  [expr $here - 1]
     set right [expr $here + 1]

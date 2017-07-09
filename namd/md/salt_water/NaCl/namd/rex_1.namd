@@ -82,7 +82,7 @@ if { ! [catch numPes] } {
 
 puts "======================================="
 puts "namespace of "
-puts [namespace which -command callback]
+puts [namespace which -command seed]
 puts "tcl version: $tcl_version"
 puts "======================================="
 startup

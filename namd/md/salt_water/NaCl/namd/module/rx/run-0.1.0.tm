@@ -1,13 +1,16 @@
 namespace eval ::namd::rx {namespace export run}
-source module/rx/replicaNeighbor-0.1.0.tm
+source module/rx/replicaInfo-0.1.0.tm
 source module/rx/exchange-0.1.0.tm
+source module/rx/main-0.1.0.tm
 source module/tk/io/write-0.1.0.tm
 source module/tk/io/appendln-0.1.0.tm
 source module/logInfo-0.1.0.tm
 
-
 #----------------------------------------------------
 # NAMD Replica Exchange
+#
+# Args:
+# T (default 298): temperature used for Metropolis-Hasting algorithm
 #----------------------------------------------------
 proc ::namd::rx::run {params} {
     set defaults [dict create \
@@ -18,43 +21,18 @@ proc ::namd::rx::run {params} {
         ] \
         output  undefined \
         grids {} \
+        T 300 \
     ]
 
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
     set p [dict merge $defaults $params]
 
-    set log_file [dict get $p output]
-    
-    # total number of MD steps
-    set total_steps [dict get $p steps total]
-
-    # number of steps between replica exchanges
-    set block_steps [dict get $p steps block]
-
-
     ::replicaBarrier
-    set rInfo [::namd::rx::replicaNeighbor]
-    
-    set ccc 0
-
-    ::namd::tk::io::write $log_file ""
-
-    while {$ccc < $total_steps} {
-        puts "======================================"
-        puts "Potential E = [::namd::logInfo POTENTIAL] "
-        puts "======================================"
-        ::run $block_steps
-
-        incr ccc $block_steps
-
-        ::namd::tk::io::appendln $log_file [join \
-            [list \
-                $ccc \
-                [myReplica] \
-            ] \
-            " " \
-        ]
-    }
-
+    ::namd::rx::main \
+        [::namd::rx::replicaInfo] \
+        [dict get $p steps total] \
+        [dict get $p steps block] \
+        [dict get $p T] \
+        [dict get $p output]
     ::replicaBarrier
 }

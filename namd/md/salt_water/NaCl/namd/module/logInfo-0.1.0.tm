@@ -7,9 +7,10 @@ source module/tk/convert/list2dict-0.1.0.tm
 # return the whole dictionary if 
 # no keys are given.
 #
-# Note: this function must be called
-#  before the "run" command.
-#  otherwise it will return empty dict {}.
+# Note: this function ::namd::logInfoSetup 
+#  must be called before the "run" command
+#  to inform NAMD to use this procedure.
+#  Otherwise ::namd::logInfo will return empty dict {}.
 # 
 # Note to developers:
 # NAMD doesn't make it easy to get its internal information
@@ -27,10 +28,12 @@ proc ::namd::logInfo_aux {namd_keys namd_values} {
     set ::namd::__NAMD_LOG_INFO__ [::namd::tk::convert::list2dict $namd_keys $namd_values]
 }
 
+proc ::namd::logInfoSetup {} {
+    ::callback ::namd::logInfo_aux
+}
+
 proc ::namd::logInfo {{key {}}} {
     global ::namd::__NAMD_LOG_INFO__
-    
-    ::callback ::namd::logInfo_aux
 
     if {[llength $key] == 0} {
         return $::namd::__NAMD_LOG_INFO__
