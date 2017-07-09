@@ -12,7 +12,7 @@ set isRestart [expr $stage > 1 ? true : false]
 
 set replicaId      [::myReplica]
 set temperature    310
-set save_freq      100
+set save_freq      20
 set em_steps       100
 set total_steps    100
 set block_steps     20
@@ -80,20 +80,10 @@ if { ! [catch numPes] } {
 }
 
 
-proc count {n} {
-    set max 1000000
-    if {$n >= $max} {
-        return "reached $max"
-    } else {
-        tailcall count [expr $n + 1]
-    }
-}
-
-puts [count 0]
-
 puts "======================================="
 puts "namespace of "
-puts [namespace which -command numReplicas]
+puts [namespace which -command callback]
+puts "tcl version: $tcl_version"
 puts "======================================="
 startup
 exit

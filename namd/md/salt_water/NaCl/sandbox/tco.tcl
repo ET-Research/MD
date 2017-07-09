@@ -1,5 +1,5 @@
 proc count {n} {
-    set max 1000000
+    set max 10000
     if {$n >= $max} {
         return "reached $max"
     } else {

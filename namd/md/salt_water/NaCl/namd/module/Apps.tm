@@ -1,5 +1,6 @@
 source module/tk/all.tm
 source module/lastTimeStep-0.1.0.tm
+source module/logInfo-0.1.0.tm
 
 source module/T-0.1.0.tm
 source module/LangevinT-0.1.0.tm
