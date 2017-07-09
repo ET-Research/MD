@@ -1,5 +1,4 @@
 namespace eval ::namd::rx {}
-source module/logInfo-0.1.0.tm
 
 #-------------------------------------------------------
 # Perform replica exchange

@@ -1,6 +1,5 @@
-source module/tk/math/isEven-0.1.0.tm
-
 namespace eval ::namd::rx {}
+source module/tk/math/isEven-0.1.0.tm
 
 #--------------------------------------------------------
 # Get information of the current replica
@@ -46,12 +45,11 @@ proc ::namd::rx::replicaInfo {} {
     }
 
     return [dict create \
-        id [::myReplica] \
-        a [dict create \
+        R [dict create \
             local $local_a \
             index $index_a \
         ] \
-        b [dict create \
+        L [dict create \
             local $local_b \
             index $index_b \
         ] \
