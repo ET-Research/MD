@@ -10,7 +10,7 @@ set stage     1
 set pre       [expr $stage - 1]
 set isRestart [expr $stage > 1 ? true : false]
 
-set replicaId      [myReplica]
+set replicaId      [::myReplica]
 set temperature    310
 set save_freq      100
 set em_steps       100
@@ -66,7 +66,7 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
     isRestart $isRestart \
 ]
 
-::namd::margin 5
+margin 5
 
 if { ! [catch numPes] } {
     ::namd::rx::run [dict create \
@@ -80,9 +80,20 @@ if { ! [catch numPes] } {
 }
 
 
+proc count {n} {
+    set max 1000000
+    if {$n >= $max} {
+        return "reached $max"
+    } else {
+        tailcall count [expr $n + 1]
+    }
+}
+
+puts [count 0]
+
 puts "======================================="
 puts "namespace of "
-puts [namespace which -command margin]
+puts [namespace which -command numReplicas]
 puts "======================================="
 startup
 exit

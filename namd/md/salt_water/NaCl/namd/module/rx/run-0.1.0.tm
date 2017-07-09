@@ -41,8 +41,12 @@ proc ::namd::rx::run {params} {
     while {$ccc < $total_steps} {
         ::run $block_steps
 
-        ::callback ::namd::rx::exchange
+        puts "======================================"
+        puts "exchange"
+        puts [::callback ::namd::rx::exchange?]
+        puts "======================================"
         incr ccc $block_steps
+
         ::namd::tk::io::appendln $log_file [join \
             [list \
                 $ccc \
