@@ -1,6 +1,5 @@
 namespace eval ::namd::rx {namespace export run}
-source module/rx/replicaNeighbors-0.1.0.tm
-source module/rx/exchange-0.1.0.tm
+source module/rx/replicaInfo-0.1.0.tm
 source module/rx/main-0.1.0.tm
 source module/tk/io/write-0.1.0.tm
 source module/tk/io/appendln-0.1.0.tm
@@ -29,7 +28,7 @@ proc ::namd::rx::run {params} {
 
     ::replicaBarrier
     ::namd::rx::main \
-        [::namd::rx::replicaNeighbors] \
+        [::namd::rx::replicaInfo] \
         [dict get $p steps total] \
         [dict get $p steps block] \
         [dict get $p T] \

@@ -1,7 +1,7 @@
 namespace eval ::namd::rx {}
 source module/logInfo-0.1.0.tm
 source module/rx/exchange-0.1.0.tm
-source module/
+
 
 #---------------------------------------------
 # Let replicas talk to each other
@@ -22,6 +22,7 @@ proc ::namd::rx::talk_to {neighbor} {
     #----------------------------------------------
     if {[myReplica] > $neighbor} {
         ::replicaSend [::namd::logInfo POTENTIAL] $neighbor
+        return [::replicaRecv ]
     } elseif {[myReplica] < $neighbor} {
         set E_other [::replicaRecv $neighbor]
     } else {

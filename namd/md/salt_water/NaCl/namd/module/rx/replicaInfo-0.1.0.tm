@@ -1,57 +1,35 @@
 namespace eval ::namd::rx {}
-source module/tk/math/isEven-0.1.0.tm
 
 #--------------------------------------------------------
 # Get information of the current replica
 # and return a dictionary.
 #--------------------------------------------------------
 proc ::namd::rx::replicaInfo {} {
-    set here  [::myReplica]
-    set left  [expr $here - 1]
-    set right [expr $here + 1]
+    set here   [::myReplica]
+    set lower  [expr $here - 1]
+    set higher [expr $here + 1]
 
-    if {[::namd::tk::math::isEven [::myReplica]]} {
-        if {[expr [::myReplica] + 1] < [::numReplicas]} {
-            set local_a $right
-            set index_a $right
-        } else {
-            set local_a $here
-            set index_a $here
-        }
-
-        if {[::myReplica] > 0} {
-            set local_b $left
-            set index_b $left
-        } else {
-            set local_b $here
-            set index_b $here
-        }
+    if {[expr [::myReplica] + 1] < [::numReplicas]} {
+        set right $higher
     } else {
-        if {[::myReplica] > 0} {
-            set local_a $left
-            set index_a $left
-        } else {
-            set local_a $here
-            set index_a $here
-        }
+        set right $here
+    }
 
-        if {[expr [::myReplica] + 1] < [::numReplicas]} {
-            set local_b $right
-            set index_b $right
-        } else {
-            set local_b $here
-            set index_b $here
-        }
+    if {[::myReplica] > 0} {
+        set left $lower
+    } else {
+        set left $here
     }
 
     return [dict create \
-        R [dict create \
-            local $local_a \
-            index $index_a \
-        ] \
+        replica $here \
         L [dict create \
-            local $local_b \
-            index $index_b \
-        ] \
+            replica $left \
+            computer $left \
+          ] \
+        R [dict create \
+            replica  $right \
+            computer $right \
+          ] \
     ]
 }
