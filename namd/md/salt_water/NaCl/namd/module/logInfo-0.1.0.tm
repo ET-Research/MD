@@ -28,7 +28,7 @@ proc ::namd::logInfo_aux {namd_keys namd_values} {
     set ::namd::__NAMD_LOG_INFO__ [::namd::tk::convert::list2dict $namd_keys $namd_values]
 }
 
-proc ::namd::logInfoSetup {} {
+proc ::namd::logInfoSetUp {} {
     ::callback ::namd::logInfo_aux
 }
 
