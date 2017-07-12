@@ -12,7 +12,7 @@ source module/rx/whatsUp-0.1.0.tm
 # Also need to ask the other neighbor where it is going
 # to move.
 #-------------------------------------------------------
-proc ::namd::rx::exchange {relocate? whichNeighbor replicaInfo} {
+proc ::namd::rx::updateAddress {relocate whichNeighbor replicaInfo} {
     # note: nextNeighbor is the neighbor that will be active
     # during next round of replica-exchange attempt.
     if {$whichNeighbor eq L} {
@@ -26,7 +26,7 @@ proc ::namd::rx::exchange {relocate? whichNeighbor replicaInfo} {
     set thisAddress [::myReplica]
     set nextNeighborCurrentAddress [dict get $replicaInfo $nextNeighbor address]
     
-    if {$relocate?} {
+    if {$relocate} {
         set myNewAddress  [dict get $replicaInfo $currentNeighbor address]
     } else {
         set myNewAddress  $thisAddress
