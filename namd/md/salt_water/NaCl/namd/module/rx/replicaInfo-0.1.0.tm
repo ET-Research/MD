@@ -25,11 +25,11 @@ proc ::namd::rx::replicaInfo {} {
         replica $here \
         L [dict create \
             replica $left \
-            computer $left \
+            address $left \
           ] \
         R [dict create \
             replica  $right \
-            computer $right \
+            address $right \
           ] \
     ]
 }

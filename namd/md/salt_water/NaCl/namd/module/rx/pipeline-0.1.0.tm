@@ -1,6 +1,7 @@
 namespace eval ::namd::rx {}
 source module/tk/math/isEven-0.1.0.tm
 source module/rx/talk_to-0.1.0.tm
+source module/rx/swap-0.1.0.tm
 source module/rx/exchange-0.1.0.tm
 source module/rx/MetroHast-0.1.0.tm
 
@@ -22,13 +23,17 @@ proc ::namd::rx:;pipeline {stage replicaInfo} {
             set whichNeighbor L
         }
 
-        # get potential energies
-        lassign [::namd::rx::talk_to \
-                    [dict get $replicaInfo $whichNeighbor] \
-                ] \
-                E_self \
-                E_other
+        set neighborComputerId [dict get $replicaInfo $whichNeighbor computer]
 
-        [::namd::rx::exchange? $E_self $E_other ::namd::rx::MetroHast $T]
+        # get potential energies
+        lassign [::namd::rx::talk_to $neighborComputerId] \
+            E_self \
+            E_other
+
+        if {[::namd::rx::swap? $E_self $E_other ::namd::rx::MetroHast $T]} {
+            ::namd::rx::exchange $whichNeighbor
+        } else {
+
+        }
 
 }

@@ -6,7 +6,7 @@ source module/logInfo-0.1.0.tm
 # Let replicas talk to each other
 #
 # Args:
-#   neighbor (int): neighbor's replica ID
+#   neighbor (int): neighbor's computer ID (MPI rank)
 #
 # Returns:
 #   a boolean "true" or "false" for deciding
