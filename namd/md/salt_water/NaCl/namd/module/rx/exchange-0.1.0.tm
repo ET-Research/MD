@@ -14,7 +14,7 @@ namespace eval ::namd::rx {}
 #       after "dE".
 #   
 #-------------------------------------------------------
-proc ::namd::rx::exchange? {E_self E_neighbor f_compare args} {
+proc ::namd::rx::exchange? {E_self E_other f_compare args} {
     set dE [expr $E_other - $E_self]
     return [expr $dE < 0.0 ? true : [$f_compare $dE {*}$args]]
 }

@@ -1,6 +1,8 @@
 namespace eval ::namd::rx {}
 source module/tk/math/isEven-0.1.0.tm
 source module/rx/talk_to-0.1.0.tm
+source module/rx/exchange-0.1.0.tm
+source module/rx/MetroHast-0.1.0.tm
 
 #------------------------------------------------
 # Main execution logic of `rx`.
@@ -39,10 +41,18 @@ proc ::namd::rx::main {\
         #----------------------------------------------------
         if {  [::namd::tk::math::isEven $ccc] == \
               [::namd::tk::math::isEven [::myReplica]] } {
-            ::namd::rx::talk_to R $replicaInfo
+            set whichNeighbor R
         } else {
-            ::namd::rx::talk_to L $replicaInfo
+            set whichNeighbor L
         }
+
+        ::namd::rx::exchange? \
+            {*}[::namd::rx::talk_to \
+                [dict get $replicaInfo $whichNeighbor] \
+            ] \
+            MetroHast \
+            $T
+        
 
 
         #------------------------------
