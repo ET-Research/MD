@@ -46,14 +46,14 @@ proc ::namd::rx::main {\
             set whichNeighbor L
         }
 
-        ::namd::rx::exchange? \
-            {*}[::namd::rx::talk_to \
-                [dict get $replicaInfo $whichNeighbor] \
-            ] \
-            MetroHast \
-            $T
-        
+        # get potential energies
+        lassign [::namd::rx::talk_to \
+                    [dict get $replicaInfo $whichNeighbor] \
+                ] \
+                E_self \
+                E_other
 
+        [::namd::rx::exchange? $E_self $E_other ::namd::rx::MetroHast $T]
 
         #------------------------------
         # Save RX log info.

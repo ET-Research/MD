@@ -7,5 +7,10 @@ namespace eval ::namd::rx {}
 #---------------------------------------
 proc ::namd::rx::MetroHast {dE T} {
     set kB 0.0019872041
-    return [expr exp(-$dE/($kB * $T))]
+    set coin_flip [expr rand()]
+    if {[expr exp(-$dE/($kB * $T)) > $coin_flip]} {
+        return true
+    } else {
+        return false
+    }
 }

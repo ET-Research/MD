@@ -5,7 +5,6 @@ proc test {} {
     expr srand(12345)
     set E_self 0
     set E_other 1
-    puts "rand = [expr rand()]"
 
     set T 300
     set answer [::namd::rx::exchange? \
@@ -14,14 +13,14 @@ proc test {} {
         ::namd::rx::MetroHast \
         $T \
     ]
-    set solution true
-    if {$answer eq $answer} {
+    set solution false
+    if {$answer == $solution} {
         puts "Pass!"
     } else {
         puts "Failed"
-        puts "answer = $answer"
-        puts "solution = $solution"
     }
+    puts "answer = $answer"
+    puts "solution = $solution"
 }
 
 test

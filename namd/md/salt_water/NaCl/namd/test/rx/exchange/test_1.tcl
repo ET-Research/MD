@@ -12,13 +12,13 @@ proc test {} {
         $T \
     ]
     set solution true
-    if {$answer eq $answer} {
+    if {$answer == $solution} {
         puts "Pass!"
     } else {
         puts "Failed"
-        puts "answer = $answer"
-        puts "solution = $solution"
     }
+    puts "answer = $answer"
+    puts "solution = $solution"
 }
 
 test
