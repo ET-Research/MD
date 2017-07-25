@@ -15,16 +15,14 @@ source module/rx/log-0.1.0.tm
 #   log_file (str): output log file name
 #   rx_params (dict): replica-exchange parameters
 #------------------------------------------------
-proc ::namd::rx::main \
-{ \
+proc ::namd::rx::main { \
     replicaInfo \
     total_steps \
     block_steps \
     T \
     log_file\
     rx_params \
-} \
-{   
+} {   
     set left  [dict get $replicaInfo L]
     set right [dict get $replicaInfo R]
 

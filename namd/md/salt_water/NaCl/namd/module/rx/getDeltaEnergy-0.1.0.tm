@@ -7,25 +7,25 @@ source module/logInfo-0.1.0.tm
 #   before and after the exchange
 #
 # Args:
-#   neighbor (int): neighbor's computer ID (MPI rank)
+#   neighborAddress (int): neighbor's address (MPI rank ID)
 #   energy_term (str): which type of energy (e.g. POTENTIAL)
 # Returns:
 #   a boolean "true" or "false" for deciding
-#   whether to exchange with this neighbor
+#   whether to exchange with this neighborAddress
 #   
 #---------------------------------------------
-proc ::namd::rx::getEnergy {neighbor energy_term} {
+proc ::namd::rx::getEnergy {neighborAddress energy_term} {
     set E_self [::namd::logInfo [string toupper $energy_term]]
     #----------------------------------------------
-    # If the neighbor is on the left, do `send`.
-    # If the neighbor is on the right, do 'receive'.
-    # If the neighbor is itself, do nothing.
+    # If the neighborAddress is on the left, do `send`.
+    # If the neighborAddress is on the right, do 'receive'.
+    # If the neighborAddress is itself, do nothing.
     #----------------------------------------------
-    if {[myReplica] > $neighbor} {
-        ::replicaSend [::namd::logInfo $energy_term] $neighbor
+    if {[::myReplica] > $neighborAddress} {
+        ::replicaSend [::namd::logInfo $energy_term] $neighborAddress
         return [::replicaRecv ]
-    } elseif {[myReplica] < $neighbor} {
-        set E_other [::replicaRecv $neighbor]
+    } elseif {[::myReplica] < $neighborAddress} {
+        set E_other [::replicaRecv $neighborAddress]
     } else {
         set E_other $E_self
     }
