@@ -1,16 +1,17 @@
 namespace eval ::namd::rx {}
 source module/tk/math/isEven-0.1.0.tm
-source module/rx/talk_to-0.1.0.tm
+source module/rx/getDeltaEnergy-0.1.0.tm
 source module/rx/swap-0.1.0.tm
 source module/rx/exchange-0.1.0.tm
-source module/rx/MetroHast-0.1.0.tm
-
 
 # Perform all necessary tasks
 # Args:
 #   stage (int): which stage of replica-exchange (0-based indexing)
 #   replicaInfo (dict): replica info dictionary
-proc ::namd::rx:;pipeline {stage replicaInfo} {
+#   rx_params (dict): replica exchange parameters
+#       algorithm
+#       type
+proc ::namd::rx::pipeline {stage replicaInfo rx_params} {
         #----------------------------------------------------
         # If $stage and [::myReplica] are both even or both odd,
         #   then use talk to the right neighbor.
@@ -25,15 +26,22 @@ proc ::namd::rx:;pipeline {stage replicaInfo} {
 
         set neighborComputerId [dict get $replicaInfo $whichNeighbor computer]
 
-        # get potential energies
-        lassign [::namd::rx::talk_to $neighborComputerId] \
-            E_self \
-            E_other
-
-        if {[::namd::rx::swap? $E_self $E_other ::namd::rx::MetroHast $T]} {
-            ::namd::rx::exchange $whichNeighbor
+        if {[dict get $rx_params type] eq grid} {
+            set dE [::namd::rx::getDeltaEnergy $neighborComputerId grid]
         } else {
-
+            set dE [::namd::rx::getDeltaEnergy $neighborComputerId potential]
         }
+       
 
+        set doSwap [::namd::rx::swap? \
+            [dict get $rx_params algorithm] \
+            $dE \
+            [dict get $rx_params params] \
+        ]
+
+        if {$doSwap} {
+            return [::namd::rx::exchange $whichNeighbor]
+        } else {
+            return $replicaInfo
+        }
 }

@@ -13,6 +13,7 @@ source module/rx/log-0.1.0.tm
 #   block_steps (int): number steps between exchanges
 #   T (float): temperature for Metropolis-Hasting algorithm
 #   log_file (str): output log file name
+#   rx_params (dict): replica-exchange parameters
 #------------------------------------------------
 proc ::namd::rx::main \
 { \
@@ -21,6 +22,7 @@ proc ::namd::rx::main \
     block_steps \
     T \
     log_file\
+    rx_params \
 } \
 {   
     set left  [dict get $replicaInfo L]
@@ -35,7 +37,7 @@ proc ::namd::rx::main \
     while {$ccc < $N} {
         ::namd::logInfoSetUp
         ::run $block_steps
-        ::namd::rx::piepline $ccc $replicaInfo
+        ::namd::rx::piepline $ccc $replicaInfo $rx_params
         ::namd::rx::log $log_file
         incr ccc
     }
