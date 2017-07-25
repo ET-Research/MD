@@ -1,10 +1,9 @@
 namespace eval ::namd::rx {}
 
 #--------------------------------------------------------
-# Get information of the current replica
-# and return a dictionary.
+# Create a dictionary of information of this replica
 #--------------------------------------------------------
-proc ::namd::rx::replicaInfo {} {
+proc ::namd::rx::createReplicaInfo {} {
     set here   [::myReplica]
     set lower  [expr $here - 1]
     set higher [expr $here + 1]

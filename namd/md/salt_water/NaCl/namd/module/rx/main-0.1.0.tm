@@ -1,6 +1,6 @@
 namespace eval ::namd::rx {}
 source module/logInfo-0.1.0.tm
-source module/rx/pipepline-0.1.0.tm
+source module/rx/exchange-0.1.0.tm
 source module/rx/log-0.1.0.tm 
 
 
@@ -32,10 +32,10 @@ proc ::namd::rx::main { \
     set N [expr int($total_steps/$block_steps)]
 
     set ccc 0
+    ::namd::logInfoSetUp
     while {$ccc < $N} {
-        ::namd::logInfoSetUp
         ::run $block_steps
-        ::namd::rx::piepline $ccc $replicaInfo $rx_params
+        set replicaInfo [::namd::rx::exchange $ccc $replicaInfo $rx_params]
         ::namd::rx::log $log_file
         incr ccc
     }

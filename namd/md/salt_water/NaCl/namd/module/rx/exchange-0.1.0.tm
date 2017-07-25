@@ -1,30 +1,53 @@
 namespace eval ::namd::rx {}
+source module/tk/math/isEven-0.1.0.tm
+source module/rx/getDeltaEnergy-0.1.0.tm
+source module/rx/swap-0.1.0.tm
+source module/rx/updateReplicaInfo-0.1.0.tm
 
-#------------------------------------------
-# Exchange replica information
-#   between two replicas
+#------------------------------------------------------------------
+# Perform replica exchange core tasks
 # Args:
-#   whichNeighbor (str): either "L" or "R"
-#   otherNeighbor (str): complement of $whichNeighbor
-#   newAddress (int): new computer address to move to (MPI rank ID)
-#   replicaInfo (dict): {replica ... L {replica ... address ...} R {replica ... address ...}}
-#------------------------------------------
-proc ::namd::rx::exchange {whichNeighbor otherNeighbor newAddress replicaInfo} {
-    # note: $whichNeighbor will move here
-    #   and $otherNeigbor will move to somewhere (need to send a message to ask)
+#   stage (int): which stage of replica-exchange (0-based indexing)
+#   replicaInfo (dict): replica info dictionary
+#   rx_params (dict): replica exchange parameters
+#       algorithm
+#       type
+#------------------------------------------------------------------
+proc ::namd::rx::exchange {stage replicaInfo rx_params} {
+    #----------------------------------------------------
+    # If $stage and [::myReplica] are both even or both odd,
+    #   then use talk to the right neighbor.
+    # Otherwise, talk to the left neighbor.
+    #----------------------------------------------------
     set here [::myReplica]
-    set otherAddress [dict get $replicaInfo $otherNeighbor address]
-    set msg $newAddress
-    set newReplicaInfo [dict create \
-        replica [dict get $replicaInfo replica] \
-        $whichNeighbor [dict create \
-            replica [dict get $replicaInfo $whichNeighbor replica] \
-            address $here \
-        ] \
-        $otherNeighbor [dict create \
-            replica [dict get $replicaInfo $otherNeighbor replica] \
-            address [::replicaSendrecv $msg $otherAddress $otherAddress]
-        ] \
+    if {  [::namd::tk::math::isEven $stage] == \
+          [::namd::tk::math::isEven $here] } {
+        set whichNeighbor R
+        set otherNeighbor L
+    } else {
+        set whichNeighbor L
+        set otherNeighbor R
+    }
+
+    set neighborAddress [dict get $replicaInfo $whichNeighbor address]
+
+    if {[dict get $rx_params type] eq grid} {
+        set dE [::namd::rx::getDeltaEnergy $neighborAddress grid]
+    } else {
+        set dE [::namd::rx::getDeltaEnergy $neighborAddress potential]
+    }
+   
+
+    set doSwap [::namd::rx::swap? \
+        [dict get $rx_params algorithm] \
+        $dE \
+        [dict get $rx_params params] \
     ]
-    return [::replicaSendrecv $newReplicaInfo $newAddress $newAddress]
+
+    if {$doSwap} {
+        set newAddress $neighborAddress
+    } else {
+        set newAddress $here
+    }
+    return [::namd::rx::updateReplicaInfo $whichNeighbor $otherNeighbor $newAddress $replicaInfo]
 }
