@@ -76,6 +76,13 @@ if { ! [catch numPes] } {
             block $block_steps \
         ] \
         output "../output/replica/$replicaId/md${stage}/md${stage}.xlog" \
+        rx [dict create \
+            type grid \
+            algorithm MH \
+            params [dict create \
+                T $temperature \
+            ] \
+        ] \
     ]
 }
 

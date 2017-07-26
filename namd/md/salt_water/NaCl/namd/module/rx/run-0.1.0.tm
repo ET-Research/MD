@@ -25,8 +25,6 @@ proc ::namd::rx::run {params} {
             block undefined \
         ] \
         output  undefined \
-        grids {} \
-        T 298 \
         rx [dict create \
             algorithm MH \
             type undefined \
@@ -44,7 +42,6 @@ proc ::namd::rx::run {params} {
         [::namd::rx::createReplicaInfo] \
         [dict get $p steps total] \
         [dict get $p steps block] \
-        [dict get $p T] \
         [dict get $p output] \
         [dict get $p rx]
     ::replicaBarrier

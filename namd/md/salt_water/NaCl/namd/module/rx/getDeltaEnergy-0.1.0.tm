@@ -14,20 +14,25 @@ source module/logInfo-0.1.0.tm
 #   whether to exchange with this neighborAddress
 #   
 #---------------------------------------------
-proc ::namd::rx::getEnergy {neighborAddress energy_term} {
-    set E_self [::namd::logInfo [string toupper $energy_term]]
+proc ::namd::rx::getDeltaEnergy {neighborAddress energy_term} {
+    if {$energy_term eq "grid"} {
+        set term "MISC"
+    } else {
+        set term [string toupper $energy_term]
+    }
+    set E_self [::namd::logInfo $term]
     #----------------------------------------------
     # If the neighborAddress is on the left, do `send`.
     # If the neighborAddress is on the right, do 'receive'.
     # If the neighborAddress is itself, do nothing.
     #----------------------------------------------
     if {[::myReplica] > $neighborAddress} {
-        ::replicaSend [::namd::logInfo $energy_term] $neighborAddress
-        return [::replicaRecv ]
+        ::replicaSend $E_self $neighborAddress
+        return {}
     } elseif {[::myReplica] < $neighborAddress} {
         set E_other [::replicaRecv $neighborAddress]
+        return [list $E_self $E_other]
     } else {
-        set E_other $E_self
+        return [list $E_self $E_self]
     }
-    return [list $E_self $E_other]
 }

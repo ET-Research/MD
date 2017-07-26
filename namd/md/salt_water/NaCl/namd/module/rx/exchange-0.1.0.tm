@@ -1,6 +1,5 @@
 namespace eval ::namd::rx {}
 source module/tk/math/isEven-0.1.0.tm
-source module/rx/getDeltaEnergy-0.1.0.tm
 source module/rx/swap-0.1.0.tm
 source module/rx/updateReplicaInfo-0.1.0.tm
 
@@ -31,20 +30,7 @@ proc ::namd::rx::exchange {stage replicaInfo rx_params} {
 
     set neighborAddress [dict get $replicaInfo $whichNeighbor address]
 
-    if {[dict get $rx_params type] eq grid} {
-        set dE [::namd::rx::getDeltaEnergy $neighborAddress grid]
-    } else {
-        set dE [::namd::rx::getDeltaEnergy $neighborAddress potential]
-    }
-   
-
-    set doSwap [::namd::rx::swap? \
-        [dict get $rx_params algorithm] \
-        $dE \
-        [dict get $rx_params params] \
-    ]
-
-    if {$doSwap} {
+    if {[::namd::rx::swap? $neighborAddress $rx_params]} {
         set newAddress $neighborAddress
     } else {
         set newAddress $here
