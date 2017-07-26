@@ -1,6 +1,6 @@
 namespace eval ::namd::rx {}
 source module/rx/MetroHast-0.1.0.tm
-source module/rx/getDeltaEnergy-0.1.0.tm
+source module/rx/getEnergies-0.1.0.tm
 
 
 #---------------------------------------------------
@@ -15,27 +15,28 @@ source module/rx/getDeltaEnergy-0.1.0.tm
 #       after "dE".
 #   
 #---------------------------------------------------
-proc ::namd::rx::swap? {neighborAddress p} {
-    if {[dict get $p algorithm] eq "MH"} {
+proc ::namd::rx::swap? {neighborAddress rx_params} {
+    if {[dict get $rx_params algorithm] eq "MH"} {
         set rxAlgorithm ::namd::rx::MetroHast
-        set rxArgs [list [dict get [dict get $p params] T]]
+        set rxArgs [list [dict get [dict get $rx_params params] T]]
     } else {
         error "(::namd::rx::pipeline) unknown replica exchange algorithm \"$algorithm\""
     }
 
-    if {[dict get $p type] eq "grid"} {
-        set energies [::namd::rx::getDeltaEnergy $neighborAddress grid]
+    if {[dict get $rx_params type] eq "grid"} {
+        set energies [::namd::rx::getEnergies $neighborAddress grid]
     } else {
-        set energies [::namd::rx::getDeltaEnergy $neighborAddress potential]
+        set energies [::namd::rx::getEnergies $neighborAddress potential]
     }
 
-    if {[llength $energies] == 0} {
-        return [::replicaRecv $neighborAddress]
-    } else {
+    if {[::numReplicas] == 1} {
+        return false
+    } elseif {[llength $energies] == 2} {
         lassign $energies E_self E_other
-        set dE [expr $E_self - $E_other]
-        set decision [expr $dE < 0.0 ? true : [$rxAlgorithm $dE {*}$rxArgs]]
+        set decision [$rxAlgorithm $E_self $E_other $rx_params]
         ::replicaSend $decision $neighborAddress
         return $decision
+    } else {
+        return [::replicaRecv $neighborAddress]
     }
 }
