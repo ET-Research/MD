@@ -1,6 +1,6 @@
 namespace eval ::namd::rx {}
 source module/rx/MetroHast-0.1.0.tm
-source module/rx/getEnergies-0.1.0.tm
+source module/rx/delta-0.1.0.tm
 
 
 #---------------------------------------------------
@@ -15,28 +15,36 @@ source module/rx/getEnergies-0.1.0.tm
 #       after "dE".
 #   
 #---------------------------------------------------
-proc ::namd::rx::swap? {neighborAddress rx_params} {
-    if {[dict get $rx_params algorithm] eq "MH"} {
-        set rxAlgorithm ::namd::rx::MetroHast
-        set rxArgs [list [dict get [dict get $rx_params params] T]]
-    } else {
-        error "(::namd::rx::pipeline) unknown replica exchange algorithm \"$algorithm\""
-    }
-
-    if {[dict get $rx_params type] eq "grid"} {
-        set energies [::namd::rx::getEnergies $neighborAddress grid]
-    } else {
-        set energies [::namd::rx::getEnergies $neighborAddress potential]
-    }
-
+proc ::namd::rx::swap? {neighborAddress rx_config} {
     if {[::numReplicas] == 1} {
         return false
-    } elseif {[llength $energies] == 2} {
-        lassign $energies E_self E_other
-        set decision [$rxAlgorithm $E_self $E_other $rx_params]
+    }
+
+    set availableAlgo [dict create \
+        MH ::namd::rx::MetroHast \
+    ]
+
+    set algorithm [dict get $rx_config algorithm]
+    if {[dict exists $availableAlgo $algorithm]} {
+        set rxAlgorithm [dict get $availableAlgo $algorithm]
+    } else {
+        error "(from ::namd::rx::swap?) unknown replica exchange algorithm \"$algorithm\""
+    }
+
+    set diff [::namd::rx::delta \
+        [dict get $rx_config type] \
+        [dict get $rx_config params] \
+        $neighborAddress \
+    ]
+
+    if {[llength $diff] > 0} {
+        set dE_over_T [lindex $diff 0]
+        set decision [$rxAlgorithm $dE_over_T]
+        # send swapping decision to its neighbor
         ::replicaSend $decision $neighborAddress
         return $decision
     } else {
+        # get swapping decision from its neighbor
         return [::replicaRecv $neighborAddress]
     }
 }

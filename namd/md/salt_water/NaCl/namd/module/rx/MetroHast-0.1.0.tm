@@ -5,14 +5,13 @@ namespace eval ::namd::rx {}
 # Args:
 #   dE: dE = E_other - E_self
 #---------------------------------------
-proc ::namd::rx::MetroHast {E_self E_other rx_params} {
-    set kB [expr 0.0019872041]
-    set dE [expr $E_self - $E_other]
-    if {$dE < 0} {
+proc ::namd::rx::MetroHast {dE_over_T} {
+    set kB [expr 0.0019872041] ;# kcal/mol/K
+    if {$dE_over_T < 0} {
         return true
     } else {
         set coin_flip [expr rand()]
-        if {[expr exp(-$dE/(${kB} * $T)) > $coin_flip]} {
+        if {[expr exp(-$dE_over_T/(${kB})) > $coin_flip]} {
             return true
         } else {
             return false
