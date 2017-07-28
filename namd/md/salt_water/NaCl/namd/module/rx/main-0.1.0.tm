@@ -29,12 +29,13 @@ proc ::namd::rx::main { \
     # Total number of exchange attempts
     set N [expr int($total_steps/$block_steps)]
 
-    set ccc 0
     ::namd::logInfoSetUp
+    ::run 0
+    set ccc 0
     while {$ccc < $N} {
-        ::run $block_steps
         set replicaInfo [::namd::rx::exchange $ccc $replicaInfo $rx_params]
         ::namd::rx::log $log_file $ccc
+        ::run $block_steps
         incr ccc
     }
 }
