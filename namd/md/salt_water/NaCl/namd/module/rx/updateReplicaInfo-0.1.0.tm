@@ -15,10 +15,11 @@ proc ::namd::rx::updateReplicaInfo {whichNeighbor otherNeighbor newAddress repli
     set otherAddress [dict get $replicaInfo $otherNeighbor address]
     set msg $newAddress
 
+    puts ">>> [::myReplica]: updateReplicaInfo ====="
     if {$newAddress == $here} {
         # no exchange
         # only need to inform neighbor about this
-        return [dict merge \
+        set newReplicaInfo [dict merge \
             $replicaInfo \
             [dict create \
                 $otherNeighbor [dict create \
@@ -27,6 +28,8 @@ proc ::namd::rx::updateReplicaInfo {whichNeighbor otherNeighbor newAddress repli
                 ] \
             ] \
         ]
+        puts ">>>> [::myReplica]: no exchange: new replica info = $newReplicaInfo"
+        # return $newReplicaInfo
     } else {
         set newReplicaInfo [dict create \
             replica [dict get $replicaInfo replica] \
@@ -39,6 +42,6 @@ proc ::namd::rx::updateReplicaInfo {whichNeighbor otherNeighbor newAddress repli
                 address [::replicaSendrecv $msg $otherAddress $otherAddress]
             ] \
         ]
-        return [::replicaSendrecv $newReplicaInfo $newAddress $newAddress]
     }
+    return [::replicaSendrecv $newReplicaInfo $newAddress $newAddress]
 }

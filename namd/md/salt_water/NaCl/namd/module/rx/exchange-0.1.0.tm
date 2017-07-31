@@ -28,12 +28,15 @@ proc ::namd::rx::exchange {stage replicaInfo rx_params} {
         set otherNeighbor R
     }
 
+    puts "====>>> [::myReplica]: stage = $stage replicaInfo = $replicaInfo ===="
     set neighborAddress [dict get $replicaInfo $whichNeighbor address]
 
+    puts ">>> [::myReplica]: do swapping? ==="
     if {[::namd::rx::swap? $neighborAddress $rx_params]} {
         set newAddress $neighborAddress
     } else {
         set newAddress $here
     }
+    puts ">>> [::myReplica]: stage = $stage, newAddress = $newAddress"
     return [::namd::rx::updateReplicaInfo $whichNeighbor $otherNeighbor $newAddress $replicaInfo]
 }

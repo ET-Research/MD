@@ -16,7 +16,7 @@ source module/rx/delta-0.1.0.tm
 #   
 #---------------------------------------------------
 proc ::namd::rx::swap? {neighborAddress rx_config} {
-    if {[::numReplicas] == 1} {
+    if {[::numReplicas] == 1 || [::myReplica] == $neighborAddress} {
         return false
     }
 

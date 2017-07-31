@@ -10,14 +10,13 @@ proc ::namd::rx::delta_aux {rx_type rx_params neighborAddress results functions}
     if {[llength $results] > 0 || [llength $functions] == 0} {
         return [lindex $results 0]
     } else {
-        set f [lindex $functions 0]
-        set others [lindex $functions 1 end]
+        set f_compute [lindex $functions 0]
         return [::namd::rx::delta_aux \
             $rx_type \
             $rx_params \
             $neighborAddress \
-            [$f $rx_type $rx_params $neighborAddress] \
-            $others \
+            [$f_compute $rx_type $rx_params $neighborAddress] \
+            [lindex $functions 1 end] \
         ]
     }
 }
