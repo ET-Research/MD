@@ -1,5 +1,5 @@
 namespace eval ::namd {}
 
-proc ::namd::dielectric {n} {
+proc ::namd::Dielectric {n} {
     dielectric $n
 }
