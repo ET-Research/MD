@@ -29,7 +29,7 @@ source module/GaMD-0.1.0.tm
 source module/runSMD-0.1.0.tm
 source module/elecField-0.1.0.tm
 source module/gridForce-0.1.0.tm
-source module/dielectric-0.1.0.tm
+source module/Dielectric-0.1.0.tm
 
 source module/restrain-0.1.0.tm
 source module/restrainSymmetry-0.1.0.tm
