@@ -1,7 +1,7 @@
 set stage 2
-set num_replicas 2
+set num_replicas 6
 set steps_per_run 100
-set num_runs 4
+set num_runs 6
 set T 310 ;# K
 set prefix_output "md"
 

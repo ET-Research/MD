@@ -18,8 +18,7 @@ proc link_file {file_new file_target} {
 # restart
 if {$stage > 1} { 
   set pre [expr $stage - 1]
-  source "$dir_root_output/$replica_id/md${pre}/md${pre}.remdff_restart.tcl"
-  source ${restart_prefix}.tcl
+  source "$dir_root_output/$replica_id/md${pre}/${prefix_output}${pre}.tcl"
 } else {
   set stage 1 
   set i_run 0
@@ -92,7 +91,7 @@ seed [expr int(0*srand(int(100000*rand()) + 100*$replica_id) + 100000*rand() + 1
 
 langevin on
 langevinTemp $TEMP
-outputname [format "${job_output_root}_replica%d" $replica_id]
+outputname "${job_output_root}"
 
 #=================================================
 # Restart
@@ -111,7 +110,7 @@ dcdFreq [expr $steps_per_run * $runs_per_frame]
 source $namd_config_file
 
 
-set history_file [open [format "${job_output_root}_replica%d.history" $replica_id] "w"]
+set history_file [open "${job_output_root}.history" "w"]
 fconfigure $history_file -buffering line
 
 while {$i_run < $num_runs} {
@@ -174,25 +173,17 @@ while {$i_run < $num_runs} {
 
   if { $i_run % ($runs_per_frame * $frames_per_restart) == 0 ||
         $i_run == $num_runs } {
-    set restart_root [format "${job_output_root}_replica%d" $replica_id]
+    set restart_root "${job_output_root}"
     set restart_prefix "${restart_root}_x${i_run}"
     output           $restart_prefix
-    set rfile        [open "${restart_prefix}.tcl" "w"]
-    puts $rfile [list array set replica [array get replica]]
-    close $rfile
-    replicaBarrier
-
-    set rfile [open "${restart_root}.tcl" "w"]
-    puts $rfile [list set stage [expr $stage + 1]]
+    set rfile        [open "${restart_root}.tcl" "w"]
     puts $rfile [list set i_run $i_run]
     puts $rfile [list set i_step $i_step]
     puts $rfile [list set restart_prefix $restart_prefix]
+    puts $rfile [list array set replica [array get replica]]
     close $rfile
 
-    replicaBarrier
-
     if {[info exists old_restart_root]} {
-      file delete ${old_restart_root}.tcl
       file delete ${old_restart_root}.coor
       file delete ${old_restart_root}.vel
       file delete ${old_restart_root}.xsc
