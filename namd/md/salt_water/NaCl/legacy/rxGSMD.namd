@@ -18,7 +18,7 @@ proc link_file {file_new file_target} {
 # restart
 if {$stage > 1} { 
   set pre [expr $stage - 1]
-  source "$dir_root_output/$replica_id/md${pre}/${prefix_output}${pre}.tcl"
+  source "$dir_root_output/md${pre}/$replica_id/${prefix_output}${pre}.tcl"
 } else {
   set stage 1 
   set i_run 0
@@ -55,7 +55,7 @@ if {$stage > 1} {
 
 }
 
-set dir_output "$dir_root_output/$replica_id/md${stage}"
+set dir_output "$dir_root_output/md${stage}/$replica_id"
 file mkdir $dir_output
 
 set job_output_root "$dir_output/${prefix_output}${stage}"
