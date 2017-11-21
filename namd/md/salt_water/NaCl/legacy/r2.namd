@@ -1,0 +1,23 @@
+set stage 2
+set num_replicas 2
+set steps_per_run 100
+set num_runs 4
+set T 310 ;# K
+set prefix_output "md"
+
+# num_runs should be divisible by runs_per_frame * frames_per_restart
+set runs_per_frame 1
+set frames_per_restart 10
+set namd_config_file "user.namd"
+
+# directories must exist
+set dir_root_output "../output"
+
+
+# the following used only by show_replicas.vmd
+set psf_file "../system/system.psf"
+set initial_pdb_file "../system/new_good.pdb"
+
+# prevent VMD from reading replica.namd by trying command only NAMD has
+set dir_map "../map"
+if { ! [catch numPes] } { source rxGSMD.namd }

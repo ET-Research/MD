@@ -16,11 +16,12 @@ proc link_file {file_new file_target} {
 
 
 # restart
-if {[info exists restart_root]} { 
-  set restart_root [format $restart_root $replica_id]
-  source $restart_root.$replica_id.tcl
+if {$stage > 1} { 
+  set pre [expr $stage - 1]
+  source "$dir_root_output/$replica_id/md${pre}/md${pre}.remdff_restart.tcl"
+  source ${restart_prefix}.tcl
 } else {
-  set i_job 1 
+  set stage 1 
   set i_run 0
   set i_step 0
   if {[info exists first_timestep]} {
@@ -55,10 +56,10 @@ if {[info exists restart_root]} {
 
 }
 
-set dir_output "$dir_root_output/$replica_id/md${i_job}"
+set dir_output "$dir_root_output/$replica_id/md${stage}"
 file mkdir $dir_output
 
-set job_output_root "$dir_output/${prefix_output}${i_job}"
+set job_output_root "$dir_output/${prefix_output}${stage}"
 firsttimestep $i_step
 
 set replica(griddx)   "$replica(index).dx"
@@ -93,10 +94,13 @@ langevin on
 langevinTemp $TEMP
 outputname [format "${job_output_root}_replica%d" $replica_id]
 
-if {$i_run} { #restart
-  bincoordinates $restart_root.$replica_id.coor
-  binvelocities $restart_root.$replica_id.vel
-  extendedSystem $restart_root.$replica_id.xsc
+#=================================================
+# Restart
+#=================================================
+if {$i_run} {
+  bincoordinates ${restart_prefix}.coor
+  binvelocities  ${restart_prefix}.vel
+  extendedSystem ${restart_prefix}.xsc
 } else {
   temperature $TEMP
 }
@@ -126,24 +130,17 @@ while {$i_run < $num_runs} {
 
   set doswap 0
   if { $replica(index) < $replica(index.$swap) } {
-#    set temp $replica(temperature)
-#    set temp2 $replica(temperature.$swap)
     set grid $replica(griddx)
     set grid2 $replica(griddx.$swap)
     set BOLTZMAN 0.001987191
-#    set dbeta [expr ((1.0/$temp) - (1.0/$temp2)) / $BOLTZMAN]
-#    set dbeta [expr ((1.0/300) - (1.0/333)) / $BOLTZMAN]
     set pot $POTENTIAL
     set pot2 [replicaRecv $replica(loc.$swap)]
-#    set delta [expr $dbeta * ($pot2 - $pot)]
     set delta [expr ($pot2 - $pot)]
     set doswap [expr $delta < 0. || exp(-1. * $delta) > rand()]
-#    set doswap [expr exp(-1. * $delta) > rand()]
     replicaSend $doswap $replica(loc.$swap)
     if { $doswap } {
       set rid $replica(index)
       set rid2 $replica(index.$swap)
-  #    puts stderr "EXCHANGE_ACCEPT $rid ($temp) $rid2 ($temp2) RUN $i_run"
       puts stderr "EXCHANGE_ACCEPT $rid ($grid) $rid2 ($grid2) RUN $i_run"
       incr replica(exchanges_accepted)
     }
@@ -177,32 +174,31 @@ while {$i_run < $num_runs} {
 
   if { $i_run % ($runs_per_frame * $frames_per_restart) == 0 ||
         $i_run == $num_runs } {
-    set restart_root [format "${job_output_root}_replica%d"    $replica_id]
-    output           "${restart_root}_restart${i_run}"
-    set rfile        [open "${restart_root}.tcl" "w"]
+    set restart_root [format "${job_output_root}_replica%d" $replica_id]
+    set restart_prefix "${restart_root}_x${i_run}"
+    output           $restart_prefix
+    set rfile        [open "${restart_prefix}.tcl" "w"]
     puts $rfile [list array set replica [array get replica]]
     close $rfile
     replicaBarrier
-    if { $replica_id == 0 } {
-      set rfile [open [format "$restart_root.tcl" ""] "w"]
-      puts $rfile [list set i_job [expr $i_job + 1]]
-      puts $rfile [list set i_run $i_run]
-      puts $rfile [list set i_step $i_step]
-      puts $rfile [list set restart_root $restart_root]
-      close $rfile
-      if [info exists old_restart_root] {
-        set oldroot [format $old_restart_root ""]
-        file delete $oldroot.tcl
-      }
-    }
+
+    set rfile [open "${restart_root}.tcl" "w"]
+    puts $rfile [list set stage [expr $stage + 1]]
+    puts $rfile [list set i_run $i_run]
+    puts $rfile [list set i_step $i_step]
+    puts $rfile [list set restart_prefix $restart_prefix]
+    close $rfile
+
     replicaBarrier
-    if [info exists old_restart_root] {
-      set oldroot [format $old_restart_root $replica_id]
-      file delete $oldroot.$replica_id.tcl
-      file delete $oldroot.$replica_id.coor
-      file delete $oldroot.$replica_id.vel
-      file delete $oldroot.$replica_id.xsc
+
+    if {[info exists old_restart_root]} {
+      file delete ${old_restart_root}.tcl
+      file delete ${old_restart_root}.coor
+      file delete ${old_restart_root}.vel
+      file delete ${old_restart_root}.xsc
     }
+
+    # update
     set old_restart_root $restart_root
   }
 }
