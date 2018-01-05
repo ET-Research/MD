@@ -63,7 +63,6 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
 ::namd::LangevinT [dict create \
     T $temperature \
-    isRestart $isRestart \
 ]
 
 margin 5
