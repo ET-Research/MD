@@ -67,9 +67,10 @@ exec mkdir -p "../output/replica/${replicaId}/md${stage}"
 
 margin 5
 
+puts "======="
 if { ! [catch numPes] } {
     ::namd::rx::run [dict create \
-        restart undefined \
+        restart $isRestart \
         steps [dict create \
             total $total_steps \
             block $block_steps \

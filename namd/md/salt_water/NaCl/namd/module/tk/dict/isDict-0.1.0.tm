@@ -1,5 +1,7 @@
-namespace eval ::namd::tk::dict {}
+namespace eval ::_::dict {}
 
-proc ::namd::tk::dict::isDict {x} {
-    return [expr [string is list $x] && ([llength $x % 2] == 0)]
+
+# assert whether the keys from two dictionaries are equal
+proc ::_::dict::isDict {x} {
+    return [expr [string is list $x] && [expr [expr [llength $x] % 2] == 0] ? true : false]
 }

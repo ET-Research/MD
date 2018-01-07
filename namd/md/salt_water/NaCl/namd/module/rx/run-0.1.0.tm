@@ -3,7 +3,8 @@ source module/rx/createReplicaInfo-0.1.0.tm
 source module/rx/main-0.1.0.tm
 source module/tk/io/write-0.1.0.tm
 source module/tk/io/appendln-0.1.0.tm
-
+source module/tk/dict/assertDictKeyLegal-0.1.0.tm
+source module/tk/dict/nestedDictMerge-0.1.0.tm
 
 #----------------------------------------------------
 # NAMD Replica Exchange
@@ -34,9 +35,11 @@ proc ::namd::rx::run {params} {
         ]\
     ]
 
+    puts "params === $params"
+    puts "defaults === $defaults"
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
-    set p [dict merge $defaults $params]
-
+    set p [::_::dict::merge $defaults $params]
+    puts "== p = $p"
     ::replicaBarrier
     ::namd::rx::main \
         [::namd::rx::createReplicaInfo] \

@@ -2,8 +2,8 @@ Converse/Charm++ Commit ID: v6.8.0-57-g5705b64-namd-charm-6.8.0-build-2017-Sep-1
 Warning> Randomization of virtual memory (ASLR) is turned on in the kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try running with '+isomalloc_sync'.
 Charm++> scheduler running in netpoll mode.
 CharmLB> Load balancer assumes all CPUs are same.
-Charm++> Running on 1 unique compute nodes (24-way SMP).
-Charm++> cpu topology info is gathered in 0.001 seconds.
+Charm++> Running on 1 unique compute nodes (16-way SMP).
+Charm++> cpu topology info is gathered in 0.007 seconds.
 Info: NAMD 2.12 for Linux-x86_64-netlrts
 Info: 
 Info: Please visit http://www.ks.uiuc.edu/Research/namd/
@@ -14,13 +14,17 @@ Info: in all publications reporting results obtained with NAMD.
 Info: 
 Info: Based on Charm++/Converse 60800 for netlrts-linux-x86_64-iccstatic
 Info: Built Thu Sep 28 14:19:27 CDT 2017 by dhardy on athine.ks.uiuc.edu
-Info: 1 NAMD  2.12  Linux-x86_64-netlrts  1    denver.ks.uiuc.edu  steven
+Info: 1 NAMD  2.12  Linux-x86_64-netlrts  1    juneau.ks.uiuc.edu  steven
 Info: Running on 1 processors, 1 nodes, 1 physical nodes.
 Info: CPU topology information available.
-Info: Charm++/Converse parallel runtime startup completed at 0.00541306 s
-Info: 46.3984 MB of memory in use based on /proc/self/stat
+Info: Charm++/Converse parallel runtime startup completed at 0.012485 s
+Info: 46.3945 MB of memory in use based on /proc/self/stat
 Info: Configuration file is namd/rx_1.namd
 Info: Changed directory to namd
+=======
+params === restart false steps {total 100 block 20} output ../output/replica/3/md1/md1.xlog rx {type grid algorithm MH params {T 310}}
+defaults === restart undefined steps {total undefined block undefined} output undefined rx {algorithm MH type undefined params {T undefined}}
+== p = output ../output/replica/3/md1/md1.xlog restart false rx {algorithm MH params {T 310} type grid} steps {block 20 total 100}
 TCL: Reduction callback proc set to ::namd::logInfo_aux
 TCL: Suspending until startup complete.
 BUILT WITH DH MASS MODIFICATION
@@ -96,7 +100,7 @@ Info: RIGID BONDS TO HYDROGEN : ALL
 Info:         ERROR TOLERANCE : 1e-08
 Info:          MAX ITERATIONS : 100
 Info: RIGID WATER USING SETTLE ALGORITHM
-Info: RANDOM NUMBER SEED     1609784033
+Info: RANDOM NUMBER SEED     1609943873
 Info: USE HYDROGEN BONDS?    NO
 Info: COORDINATE PDB         ../system/ion.pdb
 Info: STRUCTURE FILE         ../system/ion.psf
@@ -118,9 +122,9 @@ Info: 6 CROSSTERM
 Info: 352 VDW
 Info: 17 VDW_PAIRS
 Info: 0 NBTHOLE_PAIRS
-Info: TIME FOR READING PSF FILE: 0.000287056
+Info: TIME FOR READING PSF FILE: 0.000408888
 Info: Reading pdb file ../system/ion.pdb
-Info: TIME FOR READING PDB FILE: 0.000255108
+Info: TIME FOR READING PDB FILE: 0.000350952
 Info: 
 Info: ****************************
 Info: STRUCTURE SUMMARY:
@@ -141,10 +145,10 @@ Info: TOTAL MASS = 58.4398 amu
 Info: TOTAL CHARGE = 0 e
 Info: *****************************
 Info: 
-Info: Entering startup at 0.293765 s, 158.125 MB of memory in use
-Info: Startup phase 0 took 4.88758e-05 s, 158.125 MB of memory in use
+Info: Entering startup at 0.291307 s, 158.145 MB of memory in use
+Info: Startup phase 0 took 4.60148e-05 s, 158.145 MB of memory in use
 Info: ADDED 0 IMPLICIT EXCLUSIONS
-Info: Startup phase 1 took 0.000705004 s, 158.559 MB of memory in use
+Info: Startup phase 1 took 0.000683069 s, 158.578 MB of memory in use
 Info: NONBONDED TABLE R-SQUARED SPACING: 0.0625
 Info: NONBONDED TABLE SIZE: 769 POINTS
 Info: ABSOLUTE IMPRECISION IN FAST TABLE ENERGY: 2.53117e-21 AT 11.9974
@@ -156,38 +160,38 @@ Info: INCONSISTENCY IN VDWA TABLE ENERGY VS FORCE: 0.0040507 AT 0.251946
 Info: ABSOLUTE IMPRECISION IN VDWB TABLE ENERGY: 9.34011e-27 AT 11.9974
 Info: RELATIVE IMPRECISION IN VDWB TABLE ENERGY: 2.98256e-17 AT 11.9974
 Info: INCONSISTENCY IN VDWB TABLE ENERGY VS FORCE: 0.00150189 AT 0.251946
-Info: Startup phase 2 took 0.00264907 s, 162.324 MB of memory in use
-Info: Startup phase 3 took 3.40939e-05 s, 162.324 MB of memory in use
-Info: Startup phase 4 took 2.47955e-05 s, 162.324 MB of memory in use
-Info: Startup phase 5 took 2.40803e-05 s, 162.324 MB of memory in use
+Info: Startup phase 2 took 0.00240278 s, 162.344 MB of memory in use
+Info: Startup phase 3 took 3.00407e-05 s, 162.344 MB of memory in use
+Info: Startup phase 4 took 2.40803e-05 s, 162.344 MB of memory in use
+Info: Startup phase 5 took 2.28882e-05 s, 162.344 MB of memory in use
 Info: ORIGINAL ATOMS MINMAX IS 0 0 0  0 0 5
 Info: ADJUSTED ATOMS MINMAX IS 0 0 -0.625  0 0 5.625
 Info: PATCH GRID IS 1 BY 1 BY 1
 Info: PATCH GRID IS 1-AWAY BY 1-AWAY BY 1-AWAY
-Info: REMOVING COM VELOCITY 4.47269 1.8849 -1.21604
+Info: REMOVING COM VELOCITY -2.65808 1.92019 -0.159488
 Info: LARGEST PATCH (0) HAS 2 ATOMS
 Info: TORUS A SIZE 1 USING 0
 Info: TORUS B SIZE 1 USING 0
 Info: TORUS C SIZE 1 USING 0
 Info: TORUS MINIMAL MESH SIZE IS 1 BY 1 BY 1
 Info: Placed 100% of base nodes on same physical node as patch
-Info: Startup phase 6 took 0.000114918 s, 162.324 MB of memory in use
-Info: Startup phase 7 took 3.40939e-05 s, 162.324 MB of memory in use
-Info: Startup phase 8 took 2.90871e-05 s, 162.324 MB of memory in use
+Info: Startup phase 6 took 0.000117064 s, 162.344 MB of memory in use
+Info: Startup phase 7 took 3.00407e-05 s, 162.344 MB of memory in use
+Info: Startup phase 8 took 2.40803e-05 s, 162.344 MB of memory in use
 LDB: Central LB being created...
-Info: Startup phase 9 took 3.88622e-05 s, 162.324 MB of memory in use
+Info: Startup phase 9 took 3.79086e-05 s, 162.344 MB of memory in use
 Info: CREATING 12 COMPUTE OBJECTS
-Info: Startup phase 10 took 0.000347137 s, 162.324 MB of memory in use
-Info: Startup phase 11 took 3.69549e-05 s, 162.324 MB of memory in use
-Info: Startup phase 12 took 3.19481e-05 s, 162.695 MB of memory in use
-Info: Finished startup at 0.297884 s, 162.695 MB of memory in use
+Info: Startup phase 10 took 0.000355005 s, 162.344 MB of memory in use
+Info: Startup phase 11 took 3.40939e-05 s, 162.344 MB of memory in use
+Info: Startup phase 12 took 3.29018e-05 s, 162.715 MB of memory in use
+Info: Finished startup at 0.295147 s, 162.715 MB of memory in use
 
 TCL: Running for 0 steps
 PRESSURE: 0 0 0 0 0 0 0 0 0 0
 GPRESSURE: 0 0 0 0 0 0 0 0 0 0
 ETITLE:      TS           BOND          ANGLE          DIHED          IMPRP               ELECT            VDW       BOUNDARY           MISC        KINETIC               TOTAL           TEMP      POTENTIAL         TOTAL3        TEMPAVG
 
-ENERGY:       0         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         1.9499           -174.7640       327.0831      -176.7139      -174.7640       327.0831
+ENERGY:       0         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         0.1241           -176.5898        20.8146      -176.7139      -176.5898        20.8146
 
 OPENING EXTENDED SYSTEM TRAJECTORY FILE
 ====>>> 3: stage = 0 replicaInfo = replica 3 L {replica 2 address 2} R {replica 3 address 3} ====
@@ -199,119 +203,119 @@ PRESSURE: 0 0 0 0 0 0 0 0 0 0
 GPRESSURE: 0 0 0 0 0 0 0 0 0 0
 ETITLE:      TS           BOND          ANGLE          DIHED          IMPRP               ELECT            VDW       BOUNDARY           MISC        KINETIC               TOTAL           TEMP      POTENTIAL         TOTAL3        TEMPAVG
 
-ENERGY:       0         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         1.9499           -174.7640       327.0831      -176.7139      -174.7640       327.0831
+ENERGY:       0         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         0.1241           -176.5898        20.8146      -176.7139      -176.5898        20.8146
 
-LDB: ============= START OF LOAD BALANCING ============== 0.419749
-LDB: ============== END OF LOAD BALANCING =============== 0.419795
-LDB: =============== DONE WITH MIGRATION ================ 0.419912
+LDB: ============= START OF LOAD BALANCING ============== 0.298046
+LDB: ============== END OF LOAD BALANCING =============== 0.298069
+LDB: =============== DONE WITH MIGRATION ================ 0.298115
 PRESSURE: 20 0 0 0 0 0 0 0 0 0
 GPRESSURE: 20 0 0 0 0 0 0 0 0 0
 PRESSAVG: 20 0 0 0 0 0 0 0 0 0
 GPRESSAVG: 20 0 0 0 0 0 0 0 0 0
-ENERGY:      20         0.0000         0.0000         0.0000         0.0000           -176.7053        -0.0283         0.0000         0.0000         2.0376           -174.6961       341.7849      -176.7336      -174.6376       304.2156
+ENERGY:      20         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         0.2098           -176.5042        35.1847      -176.7139      -176.4860        32.3036
 
 WRITING EXTENDED SYSTEM TO RESTART FILE AT STEP 20
 OPENING COORDINATE DCD FILE
 WRITING COORDINATES TO DCD FILE ../output/replica/3/md1/md1.dcd AT STEP 20
 WRITING COORDINATES TO RESTART FILE AT STEP 20
 FINISHED WRITING RESTART COORDINATES
-The last position output (seq=20) takes 0.003 seconds, 162.695 MB of memory in use
+The last position output (seq=20) takes 0.003 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO RESTART FILE AT STEP 20
 FINISHED WRITING RESTART VELOCITIES
 ====>>> 3: stage = 1 replicaInfo = replica 2 R {replica 3 address 2} L {replica 1 address 0} ====
 >>> 3: do swapping? ===
 >>> 3: stage = 1, newAddress = 2
 >>> 3: updateReplicaInfo =====
-The last velocity output (seq=20) takes 0.002 seconds, 162.695 MB of memory in use
+The last velocity output (seq=20) takes 0.002 seconds, 162.715 MB of memory in use
 TCL: Running for 20 steps
 PRESSURE: 20 0 0 0 0 0 0 0 0 0
 GPRESSURE: 20 0 0 0 0 0 0 0 0 0
-ENERGY:      20         0.0000         0.0000         0.0000         0.0000           -176.7053        -0.0283         0.0000         0.0000         2.0376           -174.6961       341.7849      -176.7336      -174.7086       341.7849
+ENERGY:      20         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.0000         0.2098           -176.5042        35.1847      -176.7139      -176.5064        35.1847
 
 PRESSURE: 40 0 0 0 0 0 0 0 0 0
 GPRESSURE: 40 0 0 0 0 0 0 0 0 0
 PRESSAVG: 40 0 0 0 0 0 0 0 0 0
 GPRESSAVG: 40 0 0 0 0 0 0 0 0 0
-ENERGY:      40         0.0000         0.0000         0.0000         0.0000           -176.7132        -0.0293         0.0000         0.0000         2.0772           -174.6652       348.4366      -176.7425      -174.7933       372.5906
+ENERGY:      40         0.0000         0.0000         0.0000         0.0000           -176.6887        -0.0263         0.0000         0.0000         0.1873           -176.5277        31.4205      -176.7150      -176.5552        38.9873
 
 WRITING EXTENDED SYSTEM TO RESTART FILE AT STEP 40
 WRITING COORDINATES TO DCD FILE ../output/replica/3/md1/md1.dcd AT STEP 40
 WRITING COORDINATES TO RESTART FILE AT STEP 40
 FINISHED WRITING RESTART COORDINATES
-The last position output (seq=40) takes 0.001 seconds, 162.695 MB of memory in use
+The last position output (seq=40) takes 0.002 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO RESTART FILE AT STEP 40
 FINISHED WRITING RESTART VELOCITIES
 ====>>> 3: stage = 2 replicaInfo = replica 3 L {replica 2 address 2} R {replica 3 address 3} ====
 >>> 3: do swapping? ===
 >>> 3: stage = 2, newAddress = 2
 >>> 3: updateReplicaInfo =====
-The last velocity output (seq=40) takes 0.001 seconds, 162.695 MB of memory in use
+The last velocity output (seq=40) takes 0.001 seconds, 162.715 MB of memory in use
 TCL: Running for 20 steps
 PRESSURE: 40 0 0 0 0 0 0 0 0 0
 GPRESSURE: 40 0 0 0 0 0 0 0 0 0
-ENERGY:      40         0.0000         0.0000         0.0000         0.0000           -176.7132        -0.0293         0.0000         0.0000         2.0772           -174.6652       348.4366      -176.7425      -174.6713       348.4366
+ENERGY:      40         0.0000         0.0000         0.0000         0.0000           -176.6887        -0.0263         0.0000         0.0000         0.1873           -176.5277        31.4205      -176.7150      -176.5278        31.4205
 
 PRESSURE: 60 0 0 0 0 0 0 0 0 0
 GPRESSURE: 60 0 0 0 0 0 0 0 0 0
 PRESSAVG: 60 0 0 0 0 0 0 0 0 0
 GPRESSAVG: 60 0 0 0 0 0 0 0 0 0
-ENERGY:      60         0.0000         0.0000         0.0000         0.0000           -176.7146        -0.0294         0.0000         0.0000         1.9307           -174.8133       323.8581      -176.7440      -174.8265       351.1322
+ENERGY:      60         0.0000         0.0000         0.0000         0.0000           -176.7099        -0.0289         0.0000         0.0000         0.4636           -176.2752        77.7646      -176.7388      -176.2454        45.1255
 
 WRITING EXTENDED SYSTEM TO RESTART FILE AT STEP 60
 WRITING COORDINATES TO DCD FILE ../output/replica/3/md1/md1.dcd AT STEP 60
 WRITING COORDINATES TO RESTART FILE AT STEP 60
 FINISHED WRITING RESTART COORDINATES
-The last position output (seq=60) takes 0.002 seconds, 162.695 MB of memory in use
+The last position output (seq=60) takes 0.002 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO RESTART FILE AT STEP 60
 FINISHED WRITING RESTART VELOCITIES
 ====>>> 3: stage = 3 replicaInfo = replica 2 R {replica 3 address 2} L {replica 1 address 0} ====
 >>> 3: do swapping? ===
 >>> 3: stage = 3, newAddress = 2
 >>> 3: updateReplicaInfo =====
-The last velocity output (seq=60) takes 0.002 seconds, 162.695 MB of memory in use
+The last velocity output (seq=60) takes 0.002 seconds, 162.715 MB of memory in use
 TCL: Running for 20 steps
 PRESSURE: 60 0 0 0 0 0 0 0 0 0
 GPRESSURE: 60 0 0 0 0 0 0 0 0 0
-ENERGY:      60         0.0000         0.0000         0.0000         0.0000           -176.7146        -0.0294         0.0000         0.0000         1.9307           -174.8133       323.8581      -176.7440      -174.8200       323.8581
+ENERGY:      60         0.0000         0.0000         0.0000         0.0000           -176.7099        -0.0289         0.0000         0.0000         0.4636           -176.2752        77.7646      -176.7388      -176.2799        77.7646
 
 PRESSURE: 80 0 0 0 0 0 0 0 0 0
 GPRESSURE: 80 0 0 0 0 0 0 0 0 0
 PRESSAVG: 80 0 0 0 0 0 0 0 0 0
 GPRESSAVG: 80 0 0 0 0 0 0 0 0 0
-ENERGY:      80         0.0000         0.0000         0.0000         0.0000           -176.7056        -0.0284         0.0000         0.0000         2.4815           -174.2525       416.2454      -176.7340      -174.2506       363.3206
+ENERGY:      80         0.0000         0.0000         0.0000         0.0000           -176.7743        -0.0361         0.0000         0.0000         0.6476           -176.1628       108.6254      -176.8104      -176.1712       100.0549
 
 WRITING EXTENDED SYSTEM TO RESTART FILE AT STEP 80
 WRITING COORDINATES TO DCD FILE ../output/replica/3/md1/md1.dcd AT STEP 80
 WRITING COORDINATES TO RESTART FILE AT STEP 80
 FINISHED WRITING RESTART COORDINATES
-The last position output (seq=80) takes 0.001 seconds, 162.695 MB of memory in use
+The last position output (seq=80) takes 0.002 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO RESTART FILE AT STEP 80
 FINISHED WRITING RESTART VELOCITIES
 ====>>> 3: stage = 4 replicaInfo = replica 3 L {replica 2 address 2} R {replica 3 address 3} ====
 >>> 3: do swapping? ===
 >>> 3: stage = 4, newAddress = 2
 >>> 3: updateReplicaInfo =====
-The last velocity output (seq=80) takes 0.001 seconds, 162.695 MB of memory in use
+The last velocity output (seq=80) takes 0.002 seconds, 162.715 MB of memory in use
 TCL: Running for 20 steps
 PRESSURE: 80 0 0 0 0 0 0 0 0 0
 GPRESSURE: 80 0 0 0 0 0 0 0 0 0
-ENERGY:      80         0.0000         0.0000         0.0000         0.0000           -176.7056        -0.0284         0.0000         0.0000         2.4815           -174.2525       416.2454      -176.7340      -174.2607       416.2454
+ENERGY:      80         0.0000         0.0000         0.0000         0.0000           -176.7743        -0.0361         0.0000         0.0000         0.6476           -176.1628       108.6254      -176.8104      -176.1697       108.6254
 
-LDB: ============= START OF LOAD BALANCING ============== 0.463922
-LDB: ============== END OF LOAD BALANCING =============== 0.46394
-LDB: =============== DONE WITH MIGRATION ================ 0.464068
+LDB: ============= START OF LOAD BALANCING ============== 0.363936
+LDB: ============== END OF LOAD BALANCING =============== 0.364358
+LDB: =============== DONE WITH MIGRATION ================ 0.364489
 PRESSURE: 100 0 0 0 0 0 0 0 0 0
 GPRESSURE: 100 0 0 0 0 0 0 0 0 0
 PRESSAVG: 100 0 0 0 0 0 0 0 0 0
 GPRESSAVG: 100 0 0 0 0 0 0 0 0 0
-Info: Initial time: 1 CPUs 0.00165852 s/step 0.00959793 days/ns 162.695 MB memory
-ENERGY:     100         0.0000         0.0000         0.0000         0.0000           -176.6828        -0.0256         0.0000         0.0000         2.9601           -173.7482       496.5365      -176.7084      -173.7988       481.8296
+Info: Initial time: 1 CPUs 0.000686951 s/step 0.00397541 days/ns 162.715 MB memory
+ENERGY:     100         0.0000         0.0000         0.0000         0.0000           -176.8566        -0.0445         0.0000         0.0000         0.7378           -176.1633       123.7644      -176.9011      -176.1728       124.0944
 
 WRITING EXTENDED SYSTEM TO RESTART FILE AT STEP 100
 WRITING COORDINATES TO DCD FILE ../output/replica/3/md1/md1.dcd AT STEP 100
 WRITING COORDINATES TO RESTART FILE AT STEP 100
 FINISHED WRITING RESTART COORDINATES
-The last position output (seq=100) takes 0.001 seconds, 162.695 MB of memory in use
+The last position output (seq=100) takes 0.002 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO RESTART FILE AT STEP 100
 FINISHED WRITING RESTART VELOCITIES
 =======================================
@@ -320,15 +324,15 @@ namespace of
 tcl version: 8.5
 recursion limit: 5000
 =======================================
-The last velocity output (seq=100) takes 0.001 seconds, 162.695 MB of memory in use
+The last velocity output (seq=100) takes 0.002 seconds, 162.715 MB of memory in use
 TCL: Exiting due to exit command.
 WRITING EXTENDED SYSTEM TO OUTPUT FILE AT STEP 100
 CLOSING EXTENDED SYSTEM TRAJECTORY FILE
 WRITING COORDINATES TO OUTPUT FILE AT STEP 100
 CLOSING COORDINATE DCD FILE ../output/replica/3/md1/md1.dcd
-The last position output (seq=-2) takes 0.002 seconds, 162.695 MB of memory in use
+The last position output (seq=-2) takes 0.002 seconds, 162.715 MB of memory in use
 WRITING VELOCITIES TO OUTPUT FILE AT STEP 100
 ====================================================
 
-WallClock: 0.474584  CPUTime: 0.418417  Memory: 162.695312 MB
+WallClock: 0.375171  CPUTime: 0.305681  Memory: 162.714844 MB
 [Partition 3][Node 0] End of program
