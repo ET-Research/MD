@@ -34,10 +34,14 @@ proc ::namd::rx::main { \
     set ccc 0
     while {$ccc < $N} {
         if {[llength $replicaInfo] == 0} {
-            error ">>>> [::myReplica]:: stage $ccc, replicaInfo = $replicaInfo"
+            error ">>>> [::myReplica]:: \
+                stage $ccc, replicaInfo = $replicaInfo"
             exit
         }
-        set replicaInfo [::namd::rx::exchange $ccc $replicaInfo $rx_params]
+
+        set replicaInfo [::namd::rx::exchange \
+            $ccc $replicaInfo $rx_params]
+            
         ::namd::rx::log $log_file $ccc
         ::run $block_steps
         incr ccc

@@ -17,6 +17,9 @@ fi
 
 dir_name="/Projects/dhardy/namd/Linux-x86_64-icc-netlrts"
 
+# remove old log files, otherwise new logs will be appended to old ones.
+rm -rf log/*
+
 for i in $(seq 1 $num_replicas); do
     let n=$i-1
     mkdir -p "log/${n}"

@@ -21,14 +21,15 @@ proc ::namd::rx::createReplicaInfo {} {
     }
 
     return [dict create \
+        address $here \
         replica $here \
         L [dict create \
-            replica $left \
             address $left \
+            replica $left \
           ] \
         R [dict create \
-            replica  $right \
             address $right \
+            replica  $right \
           ] \
     ]
 }

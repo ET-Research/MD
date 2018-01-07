@@ -21,22 +21,40 @@ proc ::namd::rx::exchange {stage replicaInfo rx_params} {
     set here [::myReplica]
     if {  [::namd::tk::math::isEven $stage] == \
           [::namd::tk::math::isEven $here] } {
-        set whichNeighbor R
+        set activeNeighbor R
         set otherNeighbor L
     } else {
-        set whichNeighbor L
+        set activeNeighbor L
         set otherNeighbor R
     }
 
-    puts "====>>> [::myReplica]: stage = $stage replicaInfo = $replicaInfo ===="
-    set neighborAddress [dict get $replicaInfo $whichNeighbor address]
+    puts "=== try to exchange with neighbor: $activeNeighbor"
+
+    if {[llength $replicaInfo] == 0} {
+            error ">>>> [::myReplica]:: \
+                stage $ccc, replicaInfo = $replicaInfo"
+            exit
+    }
+
+    puts "====>>> [::myReplica]: \
+        stage = $stage replicaInfo = $replicaInfo ===="
+    set neighborAddress [dict get $replicaInfo \
+        $activeNeighbor address]
 
     puts ">>> [::myReplica]: do swapping? ==="
     if {[::namd::rx::swap? $neighborAddress $rx_params]} {
+        puts "=== Yes, swap!"
         set newAddress $neighborAddress
     } else {
+        puts "=== No, no swap :("
         set newAddress $here
     }
-    puts ">>> [::myReplica]: stage = $stage, newAddress = $newAddress"
-    return [::namd::rx::updateReplicaInfo $whichNeighbor $otherNeighbor $newAddress $replicaInfo]
+    puts ">>> [::myReplica]: stage = $stage, \
+        oldAddress= $here \
+        newAddress = $newAddress"
+    return [::namd::rx::updateReplicaInfo \
+        $activeNeighbor \
+        $otherNeighbor \
+        $newAddress \
+        $replicaInfo]
 }

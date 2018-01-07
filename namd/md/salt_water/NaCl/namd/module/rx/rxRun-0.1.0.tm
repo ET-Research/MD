@@ -35,11 +35,9 @@ proc ::namd::rx::run {params} {
         ]\
     ]
 
-    puts "params === $params"
-    puts "defaults === $defaults"
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
     set p [::_::dict::merge $defaults $params]
-    puts "== p = $p"
+    
     ::replicaBarrier
     ::namd::rx::main \
         [::namd::rx::createReplicaInfo] \
