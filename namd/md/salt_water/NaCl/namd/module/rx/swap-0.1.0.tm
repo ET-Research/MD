@@ -25,6 +25,7 @@ proc ::namd::rx::swap? {neighborAddress rx_config} {
     ]
 
     set algorithm [dict get $rx_config algorithm]
+    
     if {[dict exists $availableAlgo $algorithm]} {
         set rxAlgorithm [dict get $availableAlgo $algorithm]
     } else {

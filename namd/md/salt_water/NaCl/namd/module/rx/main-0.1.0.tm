@@ -1,7 +1,7 @@
 namespace eval ::namd::rx {}
 source module/logInfo-0.1.0.tm
 source module/rx/negotiate-0.1.0.tm
-source module/rx/log-0.1.0.tm 
+source module/rx/rxSaveState-0.1.0.tm 
 
 
 #------------------------------------------------
@@ -49,7 +49,7 @@ proc ::namd::rx::main { \
             after exchange attempt $ccc; \
             replicaInfo = $replicaInfo"  
 
-        ::namd::rx::log $log_file $ccc
+        ::namd::rx::saveState $log_file $ccc
         ::run $block_steps
         incr ccc
     }

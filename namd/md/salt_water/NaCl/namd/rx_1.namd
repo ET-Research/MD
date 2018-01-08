@@ -88,8 +88,8 @@ if { ! [catch numPes] } {
 
 
 puts "======================================="
-puts "namespace of "
-puts [namespace which -command seed]
+# puts "namespace of "
+# puts [namespace which -command seed]
 puts "tcl version: $tcl_version"
 interp recursionlimit {} 5000
 puts "recursion limit: [interp recursionlimit {}]"
