@@ -75,14 +75,15 @@ if { ! [catch numPes] } {
             total $total_steps \
             block $block_steps \
         ] \
-        output "../output/replica/$replicaId/md${stage}/md${stage}.xlog" \
-        rx [dict create \
-            type grid \
-            algorithm MH \
-            params [dict create \
-                T $temperature \
-            ] \
+        output "../output/replica/md${stage}/$replicaId/md${stage}.xlog" \
+        type grid \
+        algorithm MH \
+        params [dict create \
+            T $temperature \
         ] \
+        template [::dict create \
+            src 
+        ]\
     ]
 }
 

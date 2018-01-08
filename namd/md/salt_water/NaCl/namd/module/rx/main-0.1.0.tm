@@ -2,6 +2,7 @@ namespace eval ::namd::rx {}
 source module/logInfo-0.1.0.tm
 source module/rx/negotiate-0.1.0.tm
 source module/rx/rxSaveState-0.1.0.tm 
+source module/rx/rxUpdate-0.1.0.tm 
 
 
 #------------------------------------------------
@@ -41,13 +42,21 @@ proc ::namd::rx::main { \
             exit
         }
 
+        set oldState [::dict get $replicaInfo state]
+
         # update replicaInfo
         set replicaInfo [::namd::rx::negotiate \
             $ccc $replicaInfo $rx_params]
 
+        set newState [::dict get $replicaInfo state]
+        
         puts "=== address = $thisAddress;\
             after exchange attempt $ccc; \
             replicaInfo = $replicaInfo"  
+
+        if {$newState != $oldState} {
+            ::namd::rx::update $thisAddress $newState $rx_params
+        }
 
         ::namd::rx::saveState $log_file $ccc
         ::run $block_steps
