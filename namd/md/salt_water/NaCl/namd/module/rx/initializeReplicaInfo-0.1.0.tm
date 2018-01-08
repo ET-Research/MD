@@ -1,35 +1,35 @@
 namespace eval ::namd::rx {}
 
 #--------------------------------------------------------
-# Create a dictionary of information of this replica
+# Initialize a dictionary of information of this state
 #--------------------------------------------------------
-proc ::namd::rx::createReplicaInfo {} {
+proc ::namd::rx::initializeReplicaInfo {} {
     set here   [::myReplica]
     set lower  [expr $here - 1]
     set higher [expr $here + 1]
 
-    if {[expr [::myReplica] + 1] < [::numReplicas]} {
+    if {[expr $here + 1] < [::numReplicas]} {
         set right $higher
     } else {
         set right $here
     }
 
-    if {[::myReplica] > 0} {
+    if {$here > 0} {
         set left $lower
     } else {
         set left $here
     }
 
     return [dict create \
+        state $here \
         address $here \
-        replica $here \
         L [dict create \
+            state $left \
             address $left \
-            replica $left \
           ] \
         R [dict create \
+            state  $right \
             address $right \
-            replica  $right \
           ] \
     ]
 }

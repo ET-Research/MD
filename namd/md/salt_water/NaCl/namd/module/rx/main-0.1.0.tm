@@ -1,6 +1,6 @@
 namespace eval ::namd::rx {}
 source module/logInfo-0.1.0.tm
-source module/rx/exchange-0.1.0.tm
+source module/rx/negotiate-0.1.0.tm
 source module/rx/log-0.1.0.tm 
 
 
@@ -32,16 +32,23 @@ proc ::namd::rx::main { \
     ::namd::logInfoSetUp
     ::run 0
     set ccc 0
+
+    set thisAddress [::myReplica]
     while {$ccc < $N} {
         if {[llength $replicaInfo] == 0} {
-            error ">>>> [::myReplica]:: \
-                stage $ccc, replicaInfo = $replicaInfo"
+            error ">>>> address $thisAddress:: \
+                exchange $ccc, replicaInfo = $replicaInfo"
             exit
         }
 
-        set replicaInfo [::namd::rx::exchange \
+        # update replicaInfo
+        set replicaInfo [::namd::rx::negotiate \
             $ccc $replicaInfo $rx_params]
-            
+
+        puts "=== address = $thisAddress;\
+            after exchange attempt $ccc; \
+            replicaInfo = $replicaInfo"  
+
         ::namd::rx::log $log_file $ccc
         ::run $block_steps
         incr ccc

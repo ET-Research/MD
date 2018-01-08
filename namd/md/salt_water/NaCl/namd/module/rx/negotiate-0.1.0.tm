@@ -4,7 +4,9 @@ source module/rx/swap-0.1.0.tm
 source module/rx/updateReplicaInfo-0.1.0.tm
 
 #------------------------------------------------------------------
-# Perform replica exchange core tasks
+# Perform replica exchange core tasks: negotiate for relocation
+# Key idea: the order of states stay the same throughout the simulation.
+#   Only the addresses of these states change from time to time.
 # Args:
 #   stage (int): which stage of replica-exchange (0-based indexing)
 #   replicaInfo (dict): replica info dictionary
@@ -12,15 +14,17 @@ source module/rx/updateReplicaInfo-0.1.0.tm
 #       algorithm
 #       type
 #------------------------------------------------------------------
-proc ::namd::rx::exchange {stage replicaInfo rx_params} {
+proc ::namd::rx::negotiate {stage replicaInfo rx_params} {
     #----------------------------------------------------
-    # If $stage and [::myReplica] are both even or both odd,
+    # If the exchange stage and the state are both even or both odd,
     #   then use talk to the right neighbor.
     # Otherwise, talk to the left neighbor.
     #----------------------------------------------------
-    set here [::myReplica]
-    if {  [::namd::tk::math::isEven $stage] == \
-          [::namd::tk::math::isEven $here] } {
+    set thisAddress [::myReplica]
+    set currentState [::dict get $replicaInfo state]
+
+    if {[::namd::tk::math::isEven $stage] == \
+        [::namd::tk::math::isEven $currentState]} {
         set activeNeighbor R
         set otherNeighbor L
     } else {
@@ -31,27 +35,34 @@ proc ::namd::rx::exchange {stage replicaInfo rx_params} {
     puts "=== try to exchange with neighbor: $activeNeighbor"
 
     if {[llength $replicaInfo] == 0} {
-            error ">>>> [::myReplica]:: \
-                stage $ccc, replicaInfo = $replicaInfo"
+            error ">>>> ERROR: replicaInfo became empty for \
+                address $thisAddress \
+                exchange $ccc \
+                replicaInfo = $replicaInfo"
             exit
     }
 
-    puts "====>>> [::myReplica]: \
-        stage = $stage replicaInfo = $replicaInfo ===="
-    set neighborAddress [dict get $replicaInfo \
+    puts "====>>>\
+        stage = $stage \
+        state = $currentState \
+        replicaInfo = $replicaInfo"
+
+    set activeNeighborAddress [dict get $replicaInfo \
         $activeNeighbor address]
 
-    puts ">>> [::myReplica]: do swapping? ==="
-    if {[::namd::rx::swap? $neighborAddress $rx_params]} {
+    puts ">>> address $thisAddress: do swapping?"
+    if {[::namd::rx::swap? $activeNeighborAddress $rx_params]} {
         puts "=== Yes, swap!"
-        set newAddress $neighborAddress
+        set newAddress $activeNeighborAddress
     } else {
         puts "=== No, no swap :("
-        set newAddress $here
+        set newAddress $thisAddress
     }
-    puts ">>> [::myReplica]: stage = $stage, \
-        oldAddress= $here \
+
+    puts ">>> address = $thisAddress \
+        oldAddress= $thisAddress \
         newAddress = $newAddress"
+
     return [::namd::rx::updateReplicaInfo \
         $activeNeighbor \
         $otherNeighbor \
