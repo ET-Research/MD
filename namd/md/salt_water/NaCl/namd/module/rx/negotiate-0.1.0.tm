@@ -10,11 +10,11 @@ source module/rx/updateReplicaInfo-0.1.0.tm
 # Args:
 #   stage (int): which stage of replica-exchange (0-based indexing)
 #   replicaInfo (dict): replica info dictionary
-#   rx_params (dict): replica exchange parameters
+#   rx_specs (dict): replica exchange parameters
 #       algorithm
-#       type
+#       variable
 #------------------------------------------------------------------
-proc ::namd::rx::negotiate {stage replicaInfo rx_params} {
+proc ::namd::rx::negotiate {stage replicaInfo rx_specs} {
     #----------------------------------------------------
     # If the exchange stage and the state are both even or both odd,
     #   then use talk to the right neighbor.
@@ -51,7 +51,7 @@ proc ::namd::rx::negotiate {stage replicaInfo rx_params} {
         $activeNeighbor address]
 
     puts ">>> address $thisAddress: do swapping?"
-    if {[::namd::rx::swap? $activeNeighborAddress $rx_params]} {
+    if {[::namd::rx::swap? $activeNeighborAddress $rx_specs]} {
         puts "=== Yes, swap!"
         set newAddress $activeNeighborAddress
     } else {

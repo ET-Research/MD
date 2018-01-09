@@ -13,14 +13,14 @@ source module/rx/rxUpdate-0.1.0.tm
 #   total_steps (int): total number of steps to run
 #   block_steps (int): number steps between exchanges
 #   log_file (str): output log file name
-#   rx_params (dict): replica-exchange parameters
+#   rx_specs (dict): replica-exchange parameters
 #------------------------------------------------
 proc ::namd::rx::main { \
     replicaInfo \
     total_steps \
     block_steps \
     log_file\
-    rx_params \
+    rx_specs \
 } {   
     set left  [dict get $replicaInfo L]
     set right [dict get $replicaInfo R]
@@ -46,7 +46,7 @@ proc ::namd::rx::main { \
 
         # update replicaInfo
         set replicaInfo [::namd::rx::negotiate \
-            $ccc $replicaInfo $rx_params]
+            $ccc $replicaInfo $rx_specs]
 
         set newState [::dict get $replicaInfo state]
         
@@ -55,7 +55,7 @@ proc ::namd::rx::main { \
             replicaInfo = $replicaInfo"  
 
         if {$newState != $oldState} {
-            ::namd::rx::update $thisAddress $newState $rx_params
+            # ::namd::rx::update $thisAddress $newState $rx_specs
         }
 
         ::namd::rx::saveState $log_file $ccc

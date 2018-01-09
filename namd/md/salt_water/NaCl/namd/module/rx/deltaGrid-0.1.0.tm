@@ -8,13 +8,14 @@ source module/logInfo-0.1.0.tm
 #
 # Args:
 #   neighborAddress (int): neighbor's address (MPI rank ID)
-#   energy_term (str): which type of energy (e.g. POTENTIAL)
+#   rx_params (dict): parameters needed for calculating differences
+#       between replicas
 # Returns:
 #   a boolean "true" or "false" for deciding
 #   whether to exchange with this neighborAddress
 #   
 #---------------------------------------------
-proc ::namd::rx::deltaGrid {rx_params neighborAddress} {
+proc ::namd::rx::deltaGrid {neighborAddress rx_params} {
     set thisAddress [::myReplica]
 
     set E_self [::namd::logInfo "MISC"]

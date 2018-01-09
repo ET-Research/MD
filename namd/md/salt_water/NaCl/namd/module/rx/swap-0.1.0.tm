@@ -6,16 +6,10 @@ source module/rx/delta-0.1.0.tm
 #---------------------------------------------------
 # Decide whether to do a swapping
 # Args:
-#   dE (double): delta energy
-#   f_compare: name of the function for doing comparison
-#       when E_other is higher than E_self (hill climbing)
-#       The first argument for f_compare must be dE
-#       where dE = E_other - E_self.
-#       Other parameters to f_compare can also be supplied
-#       after "dE".
-#   
+#   neighborAddress (int): neighbor replica's address
+#   rx_specs (dict): specification of replica-exchange
 #---------------------------------------------------
-proc ::namd::rx::swap? {neighborAddress rx_config} {
+proc ::namd::rx::swap? {neighborAddress rx_specs} {
     if {[::numReplicas] == 1 || [::myReplica] == $neighborAddress} {
         return false
     }
@@ -24,7 +18,7 @@ proc ::namd::rx::swap? {neighborAddress rx_config} {
         MH ::namd::rx::MetroHast \
     ]
 
-    set algorithm [dict get $rx_config algorithm]
+    set algorithm [dict get $rx_specs algorithm]
     
     if {[dict exists $availableAlgo $algorithm]} {
         set rxAlgorithm [dict get $availableAlgo $algorithm]
@@ -33,9 +27,9 @@ proc ::namd::rx::swap? {neighborAddress rx_config} {
     }
 
     set diff [::namd::rx::delta \
-        [dict get $rx_config type] \
-        [dict get $rx_config params] \
         $neighborAddress \
+        [dict get $rx_specs variable] \
+        [dict get $rx_specs params] \
     ]
 
     if {[llength $diff] > 0} {

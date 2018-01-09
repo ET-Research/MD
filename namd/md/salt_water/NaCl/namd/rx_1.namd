@@ -17,13 +17,13 @@ set em_steps       100
 set total_steps    100
 set block_steps     20
 
-exec mkdir -p "../output/replica/${replicaId}/md${stage}"
+exec mkdir -p "../output/replica/md${stage}/${replicaId}/"
 
 ::namd::IO [dict create \
     structure       "../system/ion.psf" \
     coordinates     "../system/ion.pdb" \
-    output_prefix   "../output/replica/${replicaId}/md${stage}/md${stage}" \
-    input_prefix    "../output/replica/${replicaId}/md${pre}/md${pre}.restart" \
+    output_prefix   "../output/replica/md${stage}/${replicaId}/md${stage}" \
+    input_prefix    "../output/replica/md${pre}/${replicaId}/md${pre}.restart" \
     isRestart       $isRestart \
     isReplica       true \
 ]
@@ -69,21 +69,24 @@ margin 5
 
 puts "======="
 if { ! [catch numPes] } {
-    ::namd::rx::run [dict create \
+    ::namd::rx::run [::dict create \
         restart $isRestart \
         steps [dict create \
             total $total_steps \
             block $block_steps \
         ] \
-        output "../output/replica/md${stage}/$replicaId/md${stage}.xlog" \
-        type grid \
-        algorithm MH \
-        params [dict create \
-            T $temperature \
+        log "../output/replica/md${stage}/$replicaId/md${stage}.rxlog" \
+        rx [::dict create \
+            variable grid \
+            algorithm MH \
+            params [dict create \
+                T $temperature \
+                grid_files [::dict create \
+                    src "../map/%d.dx" \
+                    link "../output/replica/md${stage}/%d/link.dx" \
+                ]\
+            ] \
         ] \
-        template [::dict create \
-            src 
-        ]\
     ]
 }
 
