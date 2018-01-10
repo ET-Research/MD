@@ -32,10 +32,12 @@ proc ::namd::rx::updateGrid {\
         while {[file exists $local_link]} {} ;# wait
     }
 
+    # Create a link to the new grid file
     ::_::file::link -symbolic $local_link $real_file
     while {![file exists $local_link]} {} ;# wait
 
     if {$reload} {
+        "== update grid"
         reloadGridforceGrid 0
     }
 }

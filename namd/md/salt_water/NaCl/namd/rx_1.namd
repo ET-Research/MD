@@ -15,15 +15,15 @@ set temperature    310
 set save_freq      20
 set em_steps       100
 set total_steps    100
-set block_steps     20
-
-exec mkdir -p "../output/replica/md${stage}/${replicaId}/"
+set block_steps    20
+set output_dir     "../output/replica/md${pre}/${replicaId}"
+exec mkdir -p      $output_dir
 
 ::namd::IO [dict create \
     structure       "../system/ion.psf" \
     coordinates     "../system/ion.pdb" \
-    output_prefix   "../output/replica/md${stage}/${replicaId}/md${stage}" \
-    input_prefix    "../output/replica/md${pre}/${replicaId}/md${pre}.restart" \
+    output_prefix   "${output_dir}/md${stage}" \
+    input_prefix    "${output_dir}/md${pre}.restart" \
     isRestart       $isRestart \
     isReplica       true \
 ]
@@ -36,7 +36,6 @@ exec mkdir -p "../output/replica/md${stage}/${replicaId}/"
     "../forcefield/par_all36_cgenff.prm" \
     "../forcefield/toppar_water_ions.str" \
 ]
-
 
 ::namd::interaction [dict create \
     cutoff       12.0 \
@@ -65,38 +64,51 @@ exec mkdir -p "../output/replica/md${stage}/${replicaId}/"
     T $temperature \
 ]
 
-margin 5
+#========================================================
+set grid_params [::list \
+    [::dict create \
+        dx             "${output_dir}/link.dx" \
+        label          "../restraint/ion_grid_label.pdb" \
+        pbc            {no no no} \
+        scaling        {1 1 1} \
+    ]\
+]
 
-puts "======="
-if { ! [catch numPes] } {
-    ::namd::rx::run [::dict create \
-        restart $isRestart \
-        steps [dict create \
-            total $total_steps \
-            block $block_steps \
-        ] \
-        log "../output/replica/md${stage}/$replicaId/md${stage}.rxlog" \
-        rx [::dict create \
-            variable grid \
-            algorithm MH \
-            params [dict create \
-                T $temperature \
-                grid_files [::dict create \
-                    src "../map/%d.dx" \
-                    link "../output/replica/md${stage}/%d/link.dx" \
-                ]\
-            ] \
-        ] \
-    ]
-}
+set grid_files [::dict create \
+    src "../map/%d.dx" \
+    link "${output_dir}/link.dx" \
+]
+
+set rx_specs [::dict create \
+    variable grid \
+    algorithm MH \
+    params [dict create \
+        T $temperature \
+        grid_files  $grid_files \
+        grid_params $grid_params \
+    ] \
+]
+
+::namd::rx::run [::dict create \
+    restart $isRestart \
+    steps [dict create \
+        total $total_steps \
+        block $block_steps \
+    ] \
+    log "../output/replica/md${stage}/$replicaId/md${stage}.rxlog" \
+    rx  $rx_specs\
+]
+
+#========================================================
 
 
-puts "======================================="
-# puts "namespace of "
-# puts [namespace which -command seed]
-puts "tcl version: $tcl_version"
-interp recursionlimit {} 5000
-puts "recursion limit: [interp recursionlimit {}]"
-puts "======================================="
-startup
-exit
+# puts "======================================="
+# # puts "namespace of "
+# # puts [namespace which -command seed]
+# puts "tcl version: $tcl_version"
+# interp recursionlimit {} 5000
+# puts "recursion limit: [interp recursionlimit {}]"
+# puts "======================================="
+# startup
+# exit
+

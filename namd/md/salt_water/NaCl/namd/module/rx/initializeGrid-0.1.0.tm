@@ -15,4 +15,5 @@ proc ::namd::rx::initializeGrid {rx_specs} {
         [::dict get $rx_specs params] \
         $noReload
 
+    ::namd::gridForce [::dict get $rx_specs params grid_params]
 }
