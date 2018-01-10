@@ -44,6 +44,8 @@ proc ::namd::rx::run {params} {
         ::namd::rx::initializeGrid [::dict get $p rx]
     }
 
+    exit
+
     ::replicaBarrier
     ::namd::rx::main \
         [::namd::rx::initializeReplicaInfo] \

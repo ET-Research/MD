@@ -74,6 +74,9 @@ set grid_params [::list \
     ]\
 ]
 
+
+
+
 set grid_files [::dict create \
     src "../map/%d.dx" \
     link "${output_dir}/link.dx" \
@@ -89,6 +92,13 @@ set rx_specs [::dict create \
         grid_params $grid_params \
     ] \
 ]
+
+
+::namd::rx::initializeGrid $rx_specs
+::namd::gridForce $grid_params
+::run 0
+reloadGridforceGrid 0
+exit
 
 ::namd::rx::run [::dict create \
     restart $isRestart \

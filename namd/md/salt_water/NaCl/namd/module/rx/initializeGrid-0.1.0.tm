@@ -15,6 +15,11 @@ proc ::namd::rx::initializeGrid {rx_specs} {
         [::dict get $rx_specs params grid_files] \
         $noReload
 
-    ::namd::gridForce [::dict get $rx_specs params grid_params]
+    puts "=== initialize grid"
+    # ::namd::gridForce [::dict get $rx_specs params grid_params]
+    # ::run 100
+    puts "== reloadGridforceGrid 0 (after initialization)"
+    # reloadGridforceGrid 0
+    puts "== done reloadGridforceGrid"
 }
 
