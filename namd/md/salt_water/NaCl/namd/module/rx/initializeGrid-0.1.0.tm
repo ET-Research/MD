@@ -12,8 +12,9 @@ proc ::namd::rx::initializeGrid {rx_specs} {
     ::namd::rx::updateGrid \
         $thisAddress \
         $thisState \
-        [::dict get $rx_specs params] \
+        [::dict get $rx_specs params grid_files] \
         $noReload
 
     ::namd::gridForce [::dict get $rx_specs params grid_params]
 }
+

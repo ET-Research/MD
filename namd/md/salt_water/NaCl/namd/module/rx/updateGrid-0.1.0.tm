@@ -5,19 +5,17 @@ source module/tk/file/file_link-0.1.0.tm
 # Args:
 #   address (int): address of the target replica
 #   new_state (int): new state of the target replica
-#   rx_params (dict): additional rx params
+#   grid_files (dict): template names for the "src" and "link" grid files
 #   reload = true (bool): whether to reload the grid
 proc ::namd::rx::updateGrid {\
     address \
     new_state \
-    rx_params \
+    grid_files \
     {reload true}} {
 
-    puts "== rx_params = $rx_params"
-    set src_file_name_template [::dict get $rx_params \
-        grid_files src]
-    set local_file_name_template [::dict get $rx_params \
-        grid_files link]
+    puts "== grid_files = $grid_files"
+    set src_file_name_template [::dict get $grid_files src]
+    set local_file_name_template [::dict get $grid_files link]
 
     set real_file  [format $src_file_name_template $new_state]
     set local_link [format $local_file_name_template $address]
@@ -37,7 +35,7 @@ proc ::namd::rx::updateGrid {\
     while {![file exists $local_link]} {} ;# wait
 
     if {$reload} {
-        "== update grid"
+        puts "==== update grid"
         reloadGridforceGrid 0
     }
 }

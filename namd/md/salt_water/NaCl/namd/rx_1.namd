@@ -16,8 +16,8 @@ set save_freq      20
 set em_steps       100
 set total_steps    100
 set block_steps    20
-set output_dir     "../output/replica/md${pre}/${replicaId}"
-exec mkdir -p      $output_dir
+set output_dir     "../output/replica/md${stage}/${replicaId}"
+file mkdir $output_dir
 
 ::namd::IO [dict create \
     structure       "../system/ion.psf" \
@@ -78,6 +78,7 @@ set grid_files [::dict create \
     src "../map/%d.dx" \
     link "${output_dir}/link.dx" \
 ]
+
 
 set rx_specs [::dict create \
     variable grid \

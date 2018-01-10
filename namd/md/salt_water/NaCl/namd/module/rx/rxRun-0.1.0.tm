@@ -39,6 +39,7 @@ proc ::namd::rx::run {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
     set p [::_::dict::merge $defaults $params]
     
+    # Initialize the grids
     if {[::dict get $p rx variable] eq "grid"} {
         ::namd::rx::initializeGrid [::dict get $p rx]
     }
