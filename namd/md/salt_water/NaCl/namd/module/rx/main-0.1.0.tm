@@ -55,7 +55,7 @@ proc ::namd::rx::main { \
             replicaInfo = $replicaInfo"  
 
         if {$newState != $oldState} {
-            # ::namd::rx::update $thisAddress $newState $rx_specs
+            ::namd::rx::update $thisAddress $newState $rx_specs
         }
 
         ::namd::rx::saveState $log_file $ccc

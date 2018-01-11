@@ -13,7 +13,8 @@ proc ::namd::rx::update {address new_state rx_specs} {
         ::namd::rx::updateGrid \
             $address \
             $new_state \
-            [::dict get $rx_specs params grid_files]
+            [::dict get $rx_specs params grid_files] \
+            [::dict get $rx_specs params grid_tags]
     } else {
         puts stderr "ERROR: unsupported rx reaction coordinate: $rx_variable"
         exit

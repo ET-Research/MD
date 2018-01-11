@@ -74,14 +74,10 @@ set grid_params [::list \
     ]\
 ]
 
-
-
-
 set grid_files [::dict create \
     src "../map/%d.dx" \
     link "${output_dir}/link.dx" \
 ]
-
 
 set rx_specs [::dict create \
     variable grid \
@@ -92,23 +88,6 @@ set rx_specs [::dict create \
         grid_params $grid_params \
     ] \
 ]
-
-set i G1
-mgridForce             on
-mgridForceFile $i      ../restraint/ion_grid_label.pdb
-mgridForceCol $i       O
-mgridForceChargeCol $i B
-mgridForcePotFile $i   ../map/map.dx
-mgridForceScale $i     1 1 1
-reloadGridforceGrid    0
-run 0
-exit
-
-::namd::rx::initializeGrid $rx_specs
-::namd::gridForce $grid_params
-::run 0
-# reloadGridforceGrid 0
-exit
 
 ::namd::rx::run [::dict create \
     restart $isRestart \

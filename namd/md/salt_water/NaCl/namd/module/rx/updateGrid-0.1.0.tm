@@ -13,7 +13,6 @@ proc ::namd::rx::updateGrid {\
     grid_files \
     grid_tags} {
 
-    puts "== grid_files = $grid_files"
     set src_file_name_template [::dict get $grid_files src]
     set local_file_name_template [::dict get $grid_files link]
 

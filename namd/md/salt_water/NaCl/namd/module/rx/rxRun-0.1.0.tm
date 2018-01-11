@@ -39,12 +39,21 @@ proc ::namd::rx::run {params} {
     ::namd::tk::dict::assertDictKeyLegal $defaults $params "::namd::rx::run"
     set p [::_::dict::merge $defaults $params]
     
-    # Initialize the grids
     if {[::dict get $p rx variable] eq "grid"} {
+        # Initialize the grids
         set grid_tags [::namd::rx::initializeGrid [::dict get $p rx]]
+        set rx_specs [::_::dict::merge \
+            [::dict get $p rx] \
+            [::dict create \
+                params [::dict create \
+                    grid_tags $grid_tags
+                ]
+            ]
+        ]
+    } else  {
+        set rx_specs [::dict get $p rx]
     }
 
-    exit
 
     ::replicaBarrier
     ::namd::rx::main \
@@ -52,7 +61,7 @@ proc ::namd::rx::run {params} {
         [::dict get $p steps total] \
         [::dict get $p steps block] \
         [::dict get $p log] \
-        [::dict get $p rx]
+        $rx_specs
     ::replicaBarrier
 }
 
