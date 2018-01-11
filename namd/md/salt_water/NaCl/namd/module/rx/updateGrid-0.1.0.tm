@@ -6,12 +6,12 @@ source module/tk/file/file_link-0.1.0.tm
 #   address (int): address of the target replica
 #   new_state (int): new state of the target replica
 #   grid_files (dict): template names for the "src" and "link" grid files
-#   reload = true (bool): whether to reload the grid
+#   grid_tags (list[str]): a list of tags for the grids
 proc ::namd::rx::updateGrid {\
     address \
     new_state \
     grid_files \
-    {reload true}} {
+    grid_tags} {
 
     puts "== grid_files = $grid_files"
     set src_file_name_template [::dict get $grid_files src]
@@ -34,8 +34,8 @@ proc ::namd::rx::updateGrid {\
     ::_::file::link -symbolic $local_link $real_file
     while {![file exists $local_link]} {} ;# wait
 
-    if {$reload} {
-        puts "==== update grid"
-        reloadGridforceGrid 0
+    foreach tag $grid_tags {
+        puts "==== update grid: $tag"
+        reloadGridforceGrid $tag
     }
 }

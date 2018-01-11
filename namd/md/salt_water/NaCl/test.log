@@ -1,0 +1,239 @@
+Using binaries in /Projects/namd2/bin/current/Linux64-multicore-CUDA
+Charm++: standalone mode (not using charmrun)
+Charm++> Running in Multicore mode:  8 threads
+Charm++> Using recursive bisection (scheme 3) for topology aware partitions
+Converse/Charm++ Commit ID: v6.7.1-0-gbdf6a1b-namd-charm-6.7.1-build-2016-Nov-07-136676
+Warning> Randomization of stack pointer is turned on in kernel, thread migration may not work! Run 'echo 0 > /proc/sys/kernel/randomize_va_space' as root to disable it, or try run with '+isomalloc_sync'.  
+CharmLB> Load balancer assumes all CPUs are same.
+Charm++> Running on 1 unique compute nodes (16-way SMP).
+Charm++> cpu topology info is gathered in 0.002 seconds.
+Info: Built with CUDA version 6050
+Did not find +devices i,j,k,... argument, using all
+Pe 3 physical rank 3 will use CUDA device of pe 4
+Pe 1 physical rank 1 will use CUDA device of pe 4
+Pe 7 physical rank 7 will use CUDA device of pe 4
+Pe 6 physical rank 6 will use CUDA device of pe 4
+Pe 2 physical rank 2 will use CUDA device of pe 4
+Pe 5 physical rank 5 will use CUDA device of pe 4
+Pe 4 physical rank 4 binding to CUDA device 0 on juneau.ks.uiuc.edu: 'Quadro P6000'  Mem: 24443MB  Rev: 6.1
+Pe 0 physical rank 0 will use CUDA device of pe 4
+Info: NAMD 2.12 for Linux-x86_64-multicore-CUDA
+Info: 
+Info: Please visit http://www.ks.uiuc.edu/Research/namd/
+Info: for updates, documentation, and support information.
+Info: 
+Info: Please cite Phillips et al., J. Comp. Chem. 26:1781-1802 (2005)
+Info: in all publications reporting results obtained with NAMD.
+Info: 
+Info: Based on Charm++/Converse 60701 for multicore-linux64-iccstatic
+Info: Built Wed Dec 21 11:34:15 CST 2016 by jim on harare.ks.uiuc.edu
+Info: 1 NAMD  2.12  Linux-x86_64-multicore-CUDA  8    juneau.ks.uiuc.edu  steven
+Info: Running on 8 processors, 1 nodes, 1 physical nodes.
+Info: CPU topology information available.
+Info: Charm++/Converse parallel runtime startup completed at 0.044291 s
+CkLoopLib is used in SMP with a simple dynamic scheduling (converse-level notification) but not using node-level queue
+Info: 20.1406 MB of memory in use based on /proc/self/stat
+Info: Configuration file is namd/bgal_rx_1.namd
+Info: Changed directory to namd
+TCL: Suspending until startup complete.
+Info: SIMULATION PARAMETERS:
+Info: TIMESTEP               2
+Info: NUMBER OF STEPS        0
+Info: STEPS PER CYCLE        20
+Info: LOAD BALANCER  Centralized
+Info: LOAD BALANCING STRATEGY  New Load Balancers -- DEFAULT
+Info: LDB PERIOD             4000 steps
+Info: FIRST LDB TIMESTEP     100
+Info: LAST LDB TIMESTEP     -1
+Info: LDB BACKGROUND SCALING 1
+Info: HOM BACKGROUND SCALING 1
+Info: MIN ATOMS PER PATCH    40
+Info: INITIAL TEMPERATURE    310
+Info: CENTER OF MASS MOVING INITIALLY? NO
+Info: DIELECTRIC             1
+Info: EXCLUDE                SCALED ONE-FOUR
+Info: 1-4 ELECTROSTATICS SCALED BY 1
+Info: MODIFIED 1-4 VDW PARAMETERS WILL BE USED
+Info: DCD FILENAME           ../output/replica/md1/0/md1.dcd
+Info: DCD FREQUENCY          20
+Info: DCD FIRST STEP         20
+Info: XST FILENAME           ../output/replica/md1/0/md1.xst
+Info: XST FREQUENCY          20
+Info: NO VELOCITY DCD OUTPUT
+Info: NO FORCE DCD OUTPUT
+Info: OUTPUT FILENAME        ../output/replica/md1/0/md1
+Info: BINARY OUTPUT FILES WILL BE USED
+Info: RESTART FILENAME       ../output/replica/md1/0/md1.restart
+Info: RESTART FREQUENCY      20
+Info: BINARY RESTART FILES WILL BE USED
+Info: SWITCHING ACTIVE
+Info: VDW FORCE SWITCHING ACTIVE
+Info: SWITCHING ON           10
+Info: SWITCHING OFF          12
+Info: PAIRLIST DISTANCE      13.5
+Info: PAIRLIST SHRINK RATE   0.01
+Info: PAIRLIST GROW RATE     0.01
+Info: PAIRLIST TRIGGER       0.3
+Info: PAIRLISTS PER CYCLE    2
+Info: PAIRLISTS ENABLED
+Info: MARGIN                 0
+Info: HYDROGEN GROUP CUTOFF  2.5
+Info: PATCH DIMENSION        16
+Info: ENERGY OUTPUT STEPS    20
+Info: CROSSTERM ENERGY INCLUDED IN DIHEDRAL
+Info: TIMING OUTPUT STEPS    200
+Info: PRESSURE OUTPUT STEPS  20
+Info: GRID FORCE ACTIVE
+Info:  Please include this reference in published work using
+Info:  the Gridforce module of NAMD: David Wells, Volha Abramkina,
+Info:  and Aleksei Aksimentiev, J. Chem. Phys. 127:125101-10 (2007).
+Info: MGRIDFORCE key G1
+Info:            Potfile ../map/betagal.dx
+Info:            Scale 1 1 1
+Info:            File ../restraint/betagal_grid_label.pdb
+Info:            Col O
+Info:            ChargeCol B
+Info:            VOffset 0 0 0
+Info:            Continuous K1 FALSE
+Info:            Continuous K2 FALSE
+Info:            Continuous K3 FALSE
+Info:            Volts FALSE
+Info:            Gridforce-Lite FALSE
+Info:            Gridforce-CheckSize TRUE
+Info: GBIS GENERALIZED BORN IMPLICIT SOLVENT ACTIVE
+Info: GBIS SOLVENT DIELECTRIC: 80
+Info: GBIS PROTEIN DIELECTRIC: 1
+Info: GBIS COULOMB RADIUS OFFSET: 0.09 Ang
+Info: GBIS ION CONCENTRATION: 0.15 M
+Info: GBIS DEBYE SCREENING LENGTH: 8.085 Ang
+Info: GBIS DELTA: 1
+Info: GBIS BETA: 0.8
+Info: GBIS GAMMA: 4.85
+Info: GBIS BORN RADIUS CUTOFF: 14 Ang
+Info: GBIS MAX BORN RADIUS: 30 Ang
+Info: SASA SURFACE TENSION: 0.005 kcal/mol/Ang^2
+Info: LANGEVIN DYNAMICS ACTIVE
+Info: LANGEVIN TEMPERATURE   310
+Info: LANGEVIN USING BBK INTEGRATOR
+Info: LANGEVIN DAMPING COEFFICIENT IS 1 INVERSE PS
+Info: LANGEVIN DYNAMICS NOT APPLIED TO HYDROGENS
+Info: FULL ELECTROSTATIC EVALUATION FREQUENCY      2
+Info: USING VERLET I (r-RESPA) MTS SCHEME.
+Info: C1 SPLITTING OF LONG RANGE ELECTROSTATICS
+Info: PLACING ATOMS IN PATCHES BY HYDROGEN GROUPS
+Info: RIGID BONDS TO HYDROGEN : ALL
+Info:         ERROR TOLERANCE : 1e-08
+Info:          MAX ITERATIONS : 100
+Info: RIGID WATER USING SETTLE ALGORITHM
+Info: RANDOM NUMBER SEED     1515620953
+Info: USE HYDROGEN BONDS?    NO
+Info: COORDINATE PDB         ../system/betagal.pdb
+Info: STRUCTURE FILE         ../system/betagal.psf
+Info: PARAMETER file: CHARMM format! 
+Info: PARAMETERS             ../forcefield/par_all36m_prot.prm
+Info: PARAMETERS             ../forcefield/par_all36_na.prm
+Info: PARAMETERS             ../forcefield/par_all36_lipid.prm
+Info: PARAMETERS             ../forcefield/par_all36_carb.prm
+Info: PARAMETERS             ../forcefield/par_all36_cgenff.prm
+Info: PARAMETERS             ../forcefield/toppar_water_ions.str
+Info: USING ARITHMETIC MEAN TO COMBINE L-J SIGMA PARAMETERS
+Info: SKIPPING rtf SECTION IN STREAM FILE
+Info: SUMMARY OF PARAMETERS:
+Info: 933 BONDS
+Info: 2721 ANGLES
+Info: 6679 DIHEDRAL
+Info: 193 IMPROPER
+Info: 6 CROSSTERM
+Info: 352 VDW
+Info: 17 VDW_PAIRS
+Info: 0 NBTHOLE_PAIRS
+Info: TIME FOR READING PSF FILE: 18.5136
+Info: Reading pdb file ../system/betagal.pdb
+Info: TIME FOR READING PDB FILE: 0.105109
+Info: 
+Info: ****************************
+Info: STRUCTURE SUMMARY:
+Info: 64060 ATOMS
+Info: 65028 BONDS
+Info: 116940 ANGLES
+Info: 172336 DIHEDRALS
+Info: 11964 IMPROPERS
+Info: 4080 CROSSTERMS
+Info: 0 EXCLUSIONS
+Info: 31232 RIGID BONDS
+Info: 1 GRIDS ACTIVE
+Info: 160948 DEGREES OF FREEDOM
+Info: 32828 HYDROGEN GROUPS
+Info: 4 ATOMS IN LARGEST HYDROGEN GROUP
+Info: 32828 MIGRATION GROUPS
+Info: 4 ATOMS IN LARGEST MIGRATION GROUP
+Info: TOTAL MASS = 464842 amu
+Info: TOTAL CHARGE = -160 e
+Info: *****************************
+Info: 
+Info: Entering startup at 24.3789 s, 297.934 MB of memory in use
+Info: Startup phase 0 took 0.000162125 s, 297.938 MB of memory in use
+Info: ADDED 350308 IMPLICIT EXCLUSIONS
+Info: Startup phase 1 took 0.086046 s, 317.984 MB of memory in use
+Info: NONBONDED TABLE R-SQUARED SPACING: 0.0625
+Info: NONBONDED TABLE SIZE: 769 POINTS
+Info: ABSOLUTE IMPRECISION IN FAST TABLE ENERGY: 2.53117e-21 AT 11.9974
+Info: RELATIVE IMPRECISION IN FAST TABLE ENERGY: 1.68907e-16 AT 11.9974
+Info: INCONSISTENCY IN FAST TABLE ENERGY VS FORCE: 0.000290274 AT 0.251946
+Info: ABSOLUTE IMPRECISION IN VDWA TABLE ENERGY: 9.6778e-33 AT 11.9974
+Info: RELATIVE IMPRECISION IN VDWA TABLE ENERGY: 3.71539e-17 AT 11.9974
+Info: INCONSISTENCY IN VDWA TABLE ENERGY VS FORCE: 0.0040507 AT 0.251946
+Info: ABSOLUTE IMPRECISION IN VDWB TABLE ENERGY: 9.34011e-27 AT 11.9974
+Info: RELATIVE IMPRECISION IN VDWB TABLE ENERGY: 2.98256e-17 AT 11.9974
+Info: INCONSISTENCY IN VDWB TABLE ENERGY VS FORCE: 0.00150189 AT 0.251946
+Info: Startup phase 2 took 0.0045259 s, 318.141 MB of memory in use
+Info: Startup phase 3 took 8.2016e-05 s, 318.168 MB of memory in use
+Info: Startup phase 4 took 0.000406981 s, 320.156 MB of memory in use
+Info: Startup phase 5 took 7.41482e-05 s, 320.41 MB of memory in use
+Info: ORIGINAL ATOMS MINMAX IS 15.79 38.665 62.949  200.286 177.868 153.841
+Info: ADJUSTED ATOMS MINMAX IS 40.4924 59.5789 77.6644  176.179 157.17 139.091
+Info: PATCH GRID IS 9 BY 7 BY 4
+Info: PATCH GRID IS 1-AWAY BY 1-AWAY BY 1-AWAY
+Info: REMOVING COM VELOCITY -0.0288421 0.00942307 -0.0444722
+Info: LARGEST PATCH (152) HAS 820 ATOMS
+Info: TORUS A SIZE 8 USING 0
+Info: TORUS B SIZE 1 USING 0
+Info: TORUS C SIZE 1 USING 0
+Info: TORUS MINIMAL MESH SIZE IS 1 BY 1 BY 1
+Info: Placed 100% of base nodes on same physical node as patch
+Info: Startup phase 6 took 0.041899 s, 329.875 MB of memory in use
+Info: Startup phase 7 took 0.000152826 s, 329.891 MB of memory in use
+Info: Startup phase 8 took 0.000930071 s, 330.809 MB of memory in use
+LDB: Central LB being created...
+Info: Startup phase 9 took 0.000705004 s, 331.023 MB of memory in use
+Info: CREATING 4573 COMPUTE OBJECTS
+Info: Updated CUDA force table with 4096 elements.
+Info: Updated CUDA LJ table with 352 x 352 elements.
+Info: Found 346 unique exclusion lists needing 1164 bytes
+Info: useSync: 0 useProxySync: 0
+Info: Startup phase 10 took 0.0283689 s, 344.75 MB of memory in use
+Info: Startup phase 11 took 0.00011611 s, 344.75 MB of memory in use
+Info: Startup phase 12 took 0.00109386 s, 344.879 MB of memory in use
+Info: Finished startup at 24.5435 s, 345.027 MB of memory in use
+
+TCL: Running for 0 steps
+PRESSURE: 0 0 0 0 0 0 0 0 0 0
+GPRESSURE: 0 0 0 0 0 0 0 0 0 0
+Warning: Energy evaluation is expensive, increase outputEnergies to improve performance.
+ETITLE:      TS           BOND          ANGLE          DIHED          IMPRP               ELECT            VDW       BOUNDARY           MISC        KINETIC               TOTAL           TEMP      POTENTIAL         TOTAL3        TEMPAVG
+
+ENERGY:       0     12072.4623     34771.2672     39919.8190      2087.2066        -117574.4214    -18906.0184         0.0000    246858.4553     49302.6176         248531.3882       308.3009    199228.7706    249189.8834       308.3009
+
+OPENING EXTENDED SYSTEM TRAJECTORY FILE
+TCL: Exiting due to exit command.
+WRITING EXTENDED SYSTEM TO OUTPUT FILE AT STEP 0
+CLOSING EXTENDED SYSTEM TRAJECTORY FILE
+WRITING COORDINATES TO OUTPUT FILE AT STEP 0
+COORDINATE DCD FILE ../output/replica/md1/0/md1.dcd WAS NOT CREATED
+The last position output (seq=-2) takes 0.016 seconds, 480.547 MB of memory in use
+WRITING VELOCITIES TO OUTPUT FILE AT STEP 0
+The last velocity output (seq=-2) takes 0.016 seconds, 480.598 MB of memory in use
+====================================================
+
+WallClock: 28.345001  CPUTime: 26.543385  Memory: 480.617188 MB
+[Partition 0][Node 0] End of program

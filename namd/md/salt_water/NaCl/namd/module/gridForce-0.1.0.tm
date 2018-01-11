@@ -13,7 +13,8 @@ namespace eval ::namd {}
 #           the scaling factor
 #   charge_column (B) - column in pdb file that specifies
 #           the charge
-#   volt (no) - whether to use eV as unit for grid potential
+#   volt (no) - whether to use eV as unit for grid potential#
+# Return: a list tags for the grids which can be used for reload the grids
 # ------------------------------------------------------
 proc ::namd::gridForce {param_list} {
     set defaults [dict create \
@@ -26,6 +27,7 @@ proc ::namd::gridForce {param_list} {
         scaling        {1 1 1} \
     ]
     
+    set grid_tags {}
     if {[llength $param_list] > 0} {
         mgridForce on
         set ccc 0
@@ -40,8 +42,8 @@ proc ::namd::gridForce {param_list} {
                     error "== file $f doesn't exist."
                 }
             }
-            incr ccc
             set tag "G${ccc}"
+            lappend grid_tags $tag
             lassign [dict get $p scaling] sx sy sz
             lassign [dict get $p pbc] pbc_x pbc_y pbc_z
 
@@ -54,6 +56,9 @@ proc ::namd::gridForce {param_list} {
             mgridForceCont1     $tag     $pbc_x
             mgridForceCont2     $tag     $pbc_y
             mgridForceCont3     $tag     $pbc_z
+            incr ccc
         }
     }
+
+    return $grid_tags
 }

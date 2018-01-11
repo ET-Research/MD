@@ -41,7 +41,7 @@ proc ::namd::rx::run {params} {
     
     # Initialize the grids
     if {[::dict get $p rx variable] eq "grid"} {
-        ::namd::rx::initializeGrid [::dict get $p rx]
+        set grid_tags [::namd::rx::initializeGrid [::dict get $p rx]]
     }
 
     exit

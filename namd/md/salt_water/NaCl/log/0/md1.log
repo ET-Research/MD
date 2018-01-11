@@ -3,7 +3,7 @@ Warning> Randomization of virtual memory (ASLR) is turned on in the kernel, thre
 Charm++> scheduler running in netpoll mode.
 CharmLB> Load balancer assumes all CPUs are same.
 Charm++> Running on 1 unique compute nodes (16-way SMP).
-Charm++> cpu topology info is gathered in 0.003 seconds.
+Charm++> cpu topology info is gathered in 0.015 seconds.
 Info: NAMD 2.12 for Linux-x86_64-netlrts
 Info: 
 Info: Please visit http://www.ks.uiuc.edu/Research/namd/
@@ -14,19 +14,13 @@ Info: in all publications reporting results obtained with NAMD.
 Info: 
 Info: Based on Charm++/Converse 60800 for netlrts-linux-x86_64-iccstatic
 Info: Built Thu Sep 28 14:19:27 CDT 2017 by dhardy on athine.ks.uiuc.edu
-Info: 1 NAMD  2.12  Linux-x86_64-netlrts  1    juneau.ks.uiuc.edu  steven
-Info: Running on 1 processors, 1 nodes, 1 physical nodes.
+Info: 1 NAMD  2.12  Linux-x86_64-netlrts  8    juneau.ks.uiuc.edu  steven
+Info: Running on 8 processors, 8 nodes, 1 physical nodes.
 Info: CPU topology information available.
-Info: Charm++/Converse parallel runtime startup completed at 0.00776911 s
-Info: 46.3984 MB of memory in use based on /proc/self/stat
-Info: Configuration file is namd/rx_1.namd
+Info: Charm++/Converse parallel runtime startup completed at 0.0204909 s
+Info: 46.4141 MB of memory in use based on /proc/self/stat
+Info: Configuration file is namd/bgal_rx_1.namd
 Info: Changed directory to namd
-== grid_files = src ../map/%d.dx link ../output/replica/md1/0/link.dx
-== target_file = /Projects/steven/repo/MD/namd/md/salt_water/NaCl/map/0.dx
-== link_file = /Projects/steven/repo/MD/namd/md/salt_water/NaCl/output/replica/md1/0/link.dx
-=== initialize grid
-== reloadGridforceGrid 0 (after initialization)
-== done reloadGridforceGrid
 TCL: Suspending until startup complete.
 BUILT WITH DH MASS MODIFICATION
 Info: SIMULATION PARAMETERS:
@@ -81,9 +75,9 @@ Info:  Please include this reference in published work using
 Info:  the Gridforce module of NAMD: David Wells, Volha Abramkina,
 Info:  and Aleksei Aksimentiev, J. Chem. Phys. 127:125101-10 (2007).
 Info: MGRIDFORCE key G1
-Info:            Potfile ../output/replica/md1/0/link.dx
+Info:            Potfile ../map/betagal.dx
 Info:            Scale 1 1 1
-Info:            File ../restraint/ion_grid_label.pdb
+Info:            File ../restraint/betagal_grid_label.pdb
 Info:            Col O
 Info:            ChargeCol B
 Info:            VOffset 0 0 0
@@ -118,10 +112,10 @@ Info: RIGID BONDS TO HYDROGEN : ALL
 Info:         ERROR TOLERANCE : 1e-08
 Info:          MAX ITERATIONS : 100
 Info: RIGID WATER USING SETTLE ALGORITHM
-Info: RANDOM NUMBER SEED     1515604980
+Info: RANDOM NUMBER SEED     1515612096
 Info: USE HYDROGEN BONDS?    NO
-Info: COORDINATE PDB         ../system/ion.pdb
-Info: STRUCTURE FILE         ../system/ion.psf
+Info: COORDINATE PDB         ../system/betagal.pdb
+Info: STRUCTURE FILE         ../system/betagal.psf
 Info: PARAMETER file: CHARMM format! 
 Info: PARAMETERS             ../forcefield/par_all36m_prot.prm
 Info: PARAMETERS             ../forcefield/par_all36_na.prm
@@ -140,34 +134,34 @@ Info: 6 CROSSTERM
 Info: 352 VDW
 Info: 17 VDW_PAIRS
 Info: 0 NBTHOLE_PAIRS
-Info: TIME FOR READING PSF FILE: 0.000444174
-Info: Reading pdb file ../system/ion.pdb
-Info: TIME FOR READING PDB FILE: 0.000445843
+Info: TIME FOR READING PSF FILE: 15.9609
+Info: Reading pdb file ../system/betagal.pdb
+Info: TIME FOR READING PDB FILE: 0.087724
 Info: 
 Info: ****************************
 Info: STRUCTURE SUMMARY:
-Info: 2 ATOMS
-Info: 0 BONDS
-Info: 0 ANGLES
-Info: 0 DIHEDRALS
-Info: 0 IMPROPERS
-Info: 0 CROSSTERMS
+Info: 64060 ATOMS
+Info: 65028 BONDS
+Info: 116940 ANGLES
+Info: 172336 DIHEDRALS
+Info: 11964 IMPROPERS
+Info: 4080 CROSSTERMS
 Info: 0 EXCLUSIONS
-Info: 0 RIGID BONDS
+Info: 31232 RIGID BONDS
 Info: 1 GRIDS ACTIVE
-Info: 6 DEGREES OF FREEDOM
-Info: 2 HYDROGEN GROUPS
-Info: 1 ATOMS IN LARGEST HYDROGEN GROUP
-Info: 2 MIGRATION GROUPS
-Info: 1 ATOMS IN LARGEST MIGRATION GROUP
-Info: TOTAL MASS = 58.4398 amu
-Info: TOTAL CHARGE = 0 e
+Info: 160948 DEGREES OF FREEDOM
+Info: 32828 HYDROGEN GROUPS
+Info: 4 ATOMS IN LARGEST HYDROGEN GROUP
+Info: 32828 MIGRATION GROUPS
+Info: 4 ATOMS IN LARGEST MIGRATION GROUP
+Info: TOTAL MASS = 464842 amu
+Info: TOTAL CHARGE = -160 e
 Info: *****************************
 Info: 
-Info: Entering startup at 0.257832 s, 158.277 MB of memory in use
-Info: Startup phase 0 took 4.50611e-05 s, 158.277 MB of memory in use
-Info: ADDED 0 IMPLICIT EXCLUSIONS
-Info: Startup phase 1 took 0.000690937 s, 158.711 MB of memory in use
+Info: Entering startup at 19.3919 s, 238.625 MB of memory in use
+Info: Startup phase 0 took 0.000293016 s, 238.625 MB of memory in use
+Info: ADDED 350308 IMPLICIT EXCLUSIONS
+Info: Startup phase 1 took 0.769328 s, 258.742 MB of memory in use
 Info: NONBONDED TABLE R-SQUARED SPACING: 0.0625
 Info: NONBONDED TABLE SIZE: 769 POINTS
 Info: ABSOLUTE IMPRECISION IN FAST TABLE ENERGY: 2.53117e-21 AT 11.9974
@@ -179,40 +173,33 @@ Info: INCONSISTENCY IN VDWA TABLE ENERGY VS FORCE: 0.0040507 AT 0.251946
 Info: ABSOLUTE IMPRECISION IN VDWB TABLE ENERGY: 9.34011e-27 AT 11.9974
 Info: RELATIVE IMPRECISION IN VDWB TABLE ENERGY: 2.98256e-17 AT 11.9974
 Info: INCONSISTENCY IN VDWB TABLE ENERGY VS FORCE: 0.00150189 AT 0.251946
-Info: Startup phase 2 took 0.0024159 s, 162.418 MB of memory in use
-Info: Startup phase 3 took 2.90871e-05 s, 162.418 MB of memory in use
-Info: Startup phase 4 took 2.28882e-05 s, 162.418 MB of memory in use
-Info: Startup phase 5 took 2.00272e-05 s, 162.418 MB of memory in use
-Info: ORIGINAL ATOMS MINMAX IS 0 0 0  0 0 5
-Info: ADJUSTED ATOMS MINMAX IS 0 0 -0.625  0 0 5.625
-Info: PATCH GRID IS 1 BY 1 BY 1
+Info: Startup phase 2 took 0.0047121 s, 258.742 MB of memory in use
+Info: Startup phase 3 took 0.000225067 s, 258.742 MB of memory in use
+Info: Startup phase 4 took 0.000458002 s, 258.742 MB of memory in use
+Info: Startup phase 5 took 0.000180006 s, 258.742 MB of memory in use
+Info: ORIGINAL ATOMS MINMAX IS 15.79 38.665 62.949  200.286 177.868 153.841
+Info: ADJUSTED ATOMS MINMAX IS 40.4924 59.5789 77.6644  176.179 157.17 139.091
+Info: PATCH GRID IS 9 BY 7 BY 4
 Info: PATCH GRID IS 1-AWAY BY 1-AWAY BY 1-AWAY
-Info: REMOVING COM VELOCITY -3.21777 -4.15825 -0.113148
-Info: LARGEST PATCH (0) HAS 2 ATOMS
+Info: REMOVING COM VELOCITY 0.000926908 -0.000592517 -0.0227058
+Info: LARGEST PATCH (152) HAS 820 ATOMS
 Info: TORUS A SIZE 1 USING 0
 Info: TORUS B SIZE 1 USING 0
 Info: TORUS C SIZE 1 USING 0
 Info: TORUS MINIMAL MESH SIZE IS 1 BY 1 BY 1
 Info: Placed 100% of base nodes on same physical node as patch
-Info: Startup phase 6 took 0.000124931 s, 162.418 MB of memory in use
-Info: Startup phase 7 took 2.90871e-05 s, 162.418 MB of memory in use
-Info: Startup phase 8 took 2.31266e-05 s, 162.418 MB of memory in use
+Info: Startup phase 6 took 0.0435979 s, 269.438 MB of memory in use
+Info: Startup phase 7 took 0.00228906 s, 269.438 MB of memory in use
+Info: Startup phase 8 took 0.0220249 s, 269.438 MB of memory in use
 LDB: Central LB being created...
-Info: Startup phase 9 took 3.88622e-05 s, 162.418 MB of memory in use
-Info: CREATING 13 COMPUTE OBJECTS
-Info: Startup phase 10 took 0.000241041 s, 162.418 MB of memory in use
-Info: Startup phase 11 took 3.09944e-05 s, 162.418 MB of memory in use
-Info: Startup phase 12 took 2.59876e-05 s, 162.637 MB of memory in use
-Info: Finished startup at 0.26157 s, 162.637 MB of memory in use
+Info: Startup phase 9 took 0.0184901 s, 269.438 MB of memory in use
+Info: CREATING 4305 COMPUTE OBJECTS
+Info: Startup phase 10 took 0.00335693 s, 269.438 MB of memory in use
+Info: useSync: 0 useProxySync: 0
+Info: Startup phase 11 took 0.00131917 s, 269.438 MB of memory in use
+Info: Startup phase 12 took 0.000710011 s, 269.438 MB of memory in use
+Info: Finished startup at 20.2588 s, 269.438 MB of memory in use
 
-TCL: Running for 0 steps
-PRESSURE: 0 0 0 0 0 0 0 0 0 0
-GPRESSURE: 0 0 0 0 0 0 0 0 0 0
-ETITLE:      TS           BOND          ANGLE          DIHED          IMPRP               ELECT            VDW       BOUNDARY           MISC        KINETIC               TOTAL           TEMP      POTENTIAL         TOTAL3        TEMPAVG
-
-ENERGY:       0         0.0000         0.0000         0.0000         0.0000           -176.6877        -0.0262         0.0000         0.2639         1.6746           -174.7754       280.8971      -176.4500      -174.7754       280.8971
-
-OPENING EXTENDED SYSTEM TRAJECTORY FILE
 FATAL ERROR: Node::reloadGridforceGrid(const char*):Could not find grid.
 [0] Stack Traceback:
   [0:0]   [0x50280d]
@@ -226,5 +213,5 @@ FATAL ERROR: Node::reloadGridforceGrid(const char*):Could not find grid.
   [0:8]   [0x1511e3e]
   [0:9]   [0xee4ef0]
   [0:10]   [0x51dec1]
-  [0:11] __libc_start_main+0xf5  [0x7f85dc13bb35]
+  [0:11] __libc_start_main+0xf5  [0x7f045627eb35]
   [0:12]   [0x40e8d9]
