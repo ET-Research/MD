@@ -18,6 +18,7 @@ proc ::_::file::link {link_type link_name target_file} {
     # relative links are not supported, target paths will always be 
     # converted to absolute, normalized form before the link is created 
     # (and therefore relative paths are interpreted as relative to the cwd).
+    # source: http://wiki.tcl.tk/3482
     #---------
     # Thus it is important to always use absolute path
     puts "== target_file = [file normalize $target_file]"
