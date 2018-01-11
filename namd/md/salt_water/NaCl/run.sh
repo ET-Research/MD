@@ -23,7 +23,10 @@ rm -rf output/*
 
 for i in $(seq 1 $num_replicas); do
     let n=$i-1
-    mkdir -p "log/${n}"
+    mkdir -p "log/md${stage}/${n}"
 done
 
-${dir_name}/charmrun ++local +p${num_cores} ${dir_name}/namd2 +replicas ${num_replicas} ${file_in} +stdout log/%d/md${stage}.log
+${dir_name}/charmrun ++local +p${num_cores} ${dir_name}/namd2 \
+    +replicas ${num_replicas} \
+    ${file_in} \
+    +stdout log/md${stage}/%d/md${stage}.log

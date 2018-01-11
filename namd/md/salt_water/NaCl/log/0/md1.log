@@ -3,7 +3,7 @@ Warning> Randomization of virtual memory (ASLR) is turned on in the kernel, thre
 Charm++> scheduler running in netpoll mode.
 CharmLB> Load balancer assumes all CPUs are same.
 Charm++> Running on 1 unique compute nodes (16-way SMP).
-Charm++> cpu topology info is gathered in 0.015 seconds.
+Charm++> cpu topology info is gathered in 0.014 seconds.
 Info: NAMD 2.12 for Linux-x86_64-netlrts
 Info: 
 Info: Please visit http://www.ks.uiuc.edu/Research/namd/
@@ -17,7 +17,7 @@ Info: Built Thu Sep 28 14:19:27 CDT 2017 by dhardy on athine.ks.uiuc.edu
 Info: 1 NAMD  2.12  Linux-x86_64-netlrts  8    juneau.ks.uiuc.edu  steven
 Info: Running on 8 processors, 8 nodes, 1 physical nodes.
 Info: CPU topology information available.
-Info: Charm++/Converse parallel runtime startup completed at 0.0204909 s
+Info: Charm++/Converse parallel runtime startup completed at 0.017988 s
 Info: 46.4141 MB of memory in use based on /proc/self/stat
 Info: Configuration file is namd/bgal_rx_1.namd
 Info: Changed directory to namd
@@ -112,7 +112,7 @@ Info: RIGID BONDS TO HYDROGEN : ALL
 Info:         ERROR TOLERANCE : 1e-08
 Info:          MAX ITERATIONS : 100
 Info: RIGID WATER USING SETTLE ALGORITHM
-Info: RANDOM NUMBER SEED     1515612096
+Info: RANDOM NUMBER SEED     1515690007
 Info: USE HYDROGEN BONDS?    NO
 Info: COORDINATE PDB         ../system/betagal.pdb
 Info: STRUCTURE FILE         ../system/betagal.psf
@@ -134,9 +134,9 @@ Info: 6 CROSSTERM
 Info: 352 VDW
 Info: 17 VDW_PAIRS
 Info: 0 NBTHOLE_PAIRS
-Info: TIME FOR READING PSF FILE: 15.9609
+Info: TIME FOR READING PSF FILE: 12.7047
 Info: Reading pdb file ../system/betagal.pdb
-Info: TIME FOR READING PDB FILE: 0.087724
+Info: TIME FOR READING PDB FILE: 0.0678799
 Info: 
 Info: ****************************
 Info: STRUCTURE SUMMARY:
@@ -158,10 +158,10 @@ Info: TOTAL MASS = 464842 amu
 Info: TOTAL CHARGE = -160 e
 Info: *****************************
 Info: 
-Info: Entering startup at 19.3919 s, 238.625 MB of memory in use
-Info: Startup phase 0 took 0.000293016 s, 238.625 MB of memory in use
+Info: Entering startup at 16.1183 s, 238.625 MB of memory in use
+Info: Startup phase 0 took 0.00031805 s, 238.625 MB of memory in use
 Info: ADDED 350308 IMPLICIT EXCLUSIONS
-Info: Startup phase 1 took 0.769328 s, 258.742 MB of memory in use
+Info: Startup phase 1 took 0.827818 s, 258.75 MB of memory in use
 Info: NONBONDED TABLE R-SQUARED SPACING: 0.0625
 Info: NONBONDED TABLE SIZE: 769 POINTS
 Info: ABSOLUTE IMPRECISION IN FAST TABLE ENERGY: 2.53117e-21 AT 11.9974
@@ -173,45 +173,50 @@ Info: INCONSISTENCY IN VDWA TABLE ENERGY VS FORCE: 0.0040507 AT 0.251946
 Info: ABSOLUTE IMPRECISION IN VDWB TABLE ENERGY: 9.34011e-27 AT 11.9974
 Info: RELATIVE IMPRECISION IN VDWB TABLE ENERGY: 2.98256e-17 AT 11.9974
 Info: INCONSISTENCY IN VDWB TABLE ENERGY VS FORCE: 0.00150189 AT 0.251946
-Info: Startup phase 2 took 0.0047121 s, 258.742 MB of memory in use
-Info: Startup phase 3 took 0.000225067 s, 258.742 MB of memory in use
-Info: Startup phase 4 took 0.000458002 s, 258.742 MB of memory in use
-Info: Startup phase 5 took 0.000180006 s, 258.742 MB of memory in use
+Info: Startup phase 2 took 0.00496697 s, 258.75 MB of memory in use
+Info: Startup phase 3 took 0.000221968 s, 258.75 MB of memory in use
+Info: Startup phase 4 took 0.000486135 s, 258.75 MB of memory in use
+Info: Startup phase 5 took 0.00019598 s, 258.75 MB of memory in use
 Info: ORIGINAL ATOMS MINMAX IS 15.79 38.665 62.949  200.286 177.868 153.841
 Info: ADJUSTED ATOMS MINMAX IS 40.4924 59.5789 77.6644  176.179 157.17 139.091
 Info: PATCH GRID IS 9 BY 7 BY 4
 Info: PATCH GRID IS 1-AWAY BY 1-AWAY BY 1-AWAY
-Info: REMOVING COM VELOCITY 0.000926908 -0.000592517 -0.0227058
+Info: REMOVING COM VELOCITY 0.0151301 0.0102397 0.0114298
 Info: LARGEST PATCH (152) HAS 820 ATOMS
 Info: TORUS A SIZE 1 USING 0
 Info: TORUS B SIZE 1 USING 0
 Info: TORUS C SIZE 1 USING 0
 Info: TORUS MINIMAL MESH SIZE IS 1 BY 1 BY 1
 Info: Placed 100% of base nodes on same physical node as patch
-Info: Startup phase 6 took 0.0435979 s, 269.438 MB of memory in use
-Info: Startup phase 7 took 0.00228906 s, 269.438 MB of memory in use
-Info: Startup phase 8 took 0.0220249 s, 269.438 MB of memory in use
+Info: Startup phase 6 took 0.0438991 s, 269.434 MB of memory in use
+Info: Startup phase 7 took 0.00244689 s, 269.434 MB of memory in use
+Info: Startup phase 8 took 0.0219631 s, 269.434 MB of memory in use
 LDB: Central LB being created...
-Info: Startup phase 9 took 0.0184901 s, 269.438 MB of memory in use
+Info: Startup phase 9 took 0.0185568 s, 269.434 MB of memory in use
 Info: CREATING 4305 COMPUTE OBJECTS
-Info: Startup phase 10 took 0.00335693 s, 269.438 MB of memory in use
+Info: Startup phase 10 took 0.00306416 s, 269.434 MB of memory in use
 Info: useSync: 0 useProxySync: 0
-Info: Startup phase 11 took 0.00131917 s, 269.438 MB of memory in use
-Info: Startup phase 12 took 0.000710011 s, 269.438 MB of memory in use
-Info: Finished startup at 20.2588 s, 269.438 MB of memory in use
+Info: Startup phase 11 took 0.00117302 s, 269.434 MB of memory in use
+Info: Startup phase 12 took 0.000600815 s, 269.434 MB of memory in use
+Info: Finished startup at 17.044 s, 269.434 MB of memory in use
 
-FATAL ERROR: Node::reloadGridforceGrid(const char*):Could not find grid.
-[0] Stack Traceback:
-  [0:0]   [0x50280d]
-  [0:1]   [0xdc9f84]
-  [0:2]   [0xeee56a]
-  [0:3] TclInvokeStringCommand+0x88  [0x14ab798]
-  [0:4]   [0x14ae2b0]
-  [0:5]   [0x14af696]
-  [0:6]   [0x14afe76]
-  [0:7]   [0x1511c81]
-  [0:8]   [0x1511e3e]
-  [0:9]   [0xee4ef0]
-  [0:10]   [0x51dec1]
-  [0:11] __libc_start_main+0xf5  [0x7f045627eb35]
-  [0:12]   [0x40e8d9]
+TCL: Running for 0 steps
+PRESSURE: 0 0 0 0 0 0 0 0 0 0
+GPRESSURE: 0 0 0 0 0 0 0 0 0 0
+ETITLE:      TS           BOND          ANGLE          DIHED          IMPRP               ELECT            VDW       BOUNDARY           MISC        KINETIC               TOTAL           TEMP      POTENTIAL         TOTAL3        TEMPAVG
+
+ENERGY:       0     12072.4623     34771.2672     39919.8190      2087.2066        -117572.9126    -18906.5518         0.0000    246858.4553     49444.6018         248674.3478       309.1888    199229.7459    249332.8630       309.1888
+
+OPENING EXTENDED SYSTEM TRAJECTORY FILE
+TCL: Exiting due to exit command.
+WRITING EXTENDED SYSTEM TO OUTPUT FILE AT STEP 0
+CLOSING EXTENDED SYSTEM TRAJECTORY FILE
+WRITING COORDINATES TO OUTPUT FILE AT STEP 0
+COORDINATE DCD FILE ../output/replica/md1/0/md1.dcd WAS NOT CREATED
+The last position output (seq=-2) takes 0.016 seconds, 294.070 MB of memory in use
+WRITING VELOCITIES TO OUTPUT FILE AT STEP 0
+The last velocity output (seq=-2) takes 0.016 seconds, 294.070 MB of memory in use
+====================================================
+
+WallClock: 21.395029  CPUTime: 21.286690  Memory: 294.070312 MB
+[Partition 0][Node 0] End of program
